@@ -5,7 +5,6 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.Frame;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.List;
 import java.awt.Panel;
 import java.awt.TextField;
@@ -42,8 +41,14 @@ public class ItemMove extends Frame implements ActionListener {
 		p.add("Center", list);
 		p.add("South", tf);
 
-		p2.setLayout(new GridLayout(6, 3, 0, 10));
+		p2.setLayout(null);
 		p2.setBackground(Color.ORANGE);
+		
+		bt.setBounds(35,50,30,30);
+		bt2.setBounds(35,100,30,30);
+		bt3.setBounds(35,150,30,30);
+		bt4.setBounds(35,200,30,30);
+		
 		p2.add(bt);
 		p2.add(bt2);
 		p2.add(bt3);
@@ -60,7 +65,7 @@ public class ItemMove extends Frame implements ActionListener {
 		add(p3);
 		setLayout(new GridLayout(1, 3));
 		setVisible(true);
-		setSize(200, 200);
+		setSize(300, 300);
 
 		// --
 		tf.addActionListener(this);
@@ -84,15 +89,16 @@ public class ItemMove extends Frame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		String str=null;
 		if (e.getSource() == tf) {
-			String str = tf.getText().trim();// 빈 공간 지우기
+			str = tf.getText().trim();// 빈 공간 지우기
 			if (str.length() != 0) {
 				list.add(tf.getText());
 				tf.setText("");
 			}
 
 		} else if (e.getSource() == tf2) {
-			String str = tf2.getText().trim();// 빈 공간 지우기
+			str = tf2.getText().trim();// 빈 공간 지우기
 			if (str.length() != 0) {
 				list2.add(tf2.getText());
 				tf2.setText("");
