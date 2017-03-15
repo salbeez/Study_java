@@ -2,9 +2,11 @@ package com.kosta.j0314;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Random;
 
 import javax.swing.*;
@@ -20,33 +22,38 @@ public class NumberBaseBall extends JFrame implements ActionListener {
 
 	JPanel p1, p1_1, p2;//
 	Random rd;
-	String solution;// ÄÄÇ»ÅÍ°¡ ¹ß»ıÇÑ ¹®Á¦
+	int[] solution = new int[3];// ì»´í“¨í„°ê°€ ë°œìƒí•œ ë¬¸ì œ
+	int[] myanswer = new int[3];// ë‚´ê°€ ì“´ ë‹µ
 
+	static int sk = 0, ball = 0;
+
+	JScrollPane scrollPane;
 	public NumberBaseBall() {
-		setTitle("¼ıÀÚ ¾ß±¸ °ÔÀÓ");
+		setTitle("ìˆ«ì ì•¼êµ¬ ê²Œì„");
 
-		la = new JLabel("ÀÔ·Â : ");
+		la = new JLabel("ì…ë ¥ : ");
 		ta = new JTextArea(30, 30);
 		tf = new JTextField(10);
 
-		b_clear = new JButton("Áö¿ì±â");
-		b_exit = new JButton("Á¾·á");
-		b_new = new JButton("»õ °ÔÀÓ");
-		b_solution = new JButton("Á¤´ä");
+		b_clear = new JButton("ì§€ìš°ê¸°");
+		b_exit = new JButton("ì¢…ë£Œ");
+		b_new = new JButton("ìƒˆ ê²Œì„");
+		b_solution = new JButton("ì •ë‹µ");
 
 		p1 = new JPanel();
 		p1_1 = new JPanel();
 		p2 = new JPanel();
 
-		p1_1.setLayout(new GridLayout(1, 2));
+		p1_1.setLayout(new FlowLayout());
 		p1_1.add(la);
 		p1_1.add(tf);
 
+		scrollPane = new JScrollPane(ta);
 		p1.setLayout(new BorderLayout());
-		p1.add("Center", ta);
+		p1.add("Center", scrollPane);
 		p1.add("South", p1_1);
 
-		p2.setBounds(75, 100, 200, 200);
+		p2.setLayout(new GridBagLayout());
 		p2.add(b_new);
 		p2.add(b_solution);
 		p2.add(b_clear);
@@ -57,6 +64,7 @@ public class NumberBaseBall extends JFrame implements ActionListener {
 		add(p2);
 		setVisible(true);
 		setSize(300, 300);
+
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		b_clear.addActionListener(this);
@@ -70,32 +78,51 @@ public class NumberBaseBall extends JFrame implements ActionListener {
 		new NumberBaseBall();
 	}
 
-	public int[] com_sol() {// ·£´ıÇÑ º¯¼ö Á¶ÀÛ
+	public void random_Com() {// ëœë¤í•œ ë³€ìˆ˜ ì¡°ì‘
 		rd = new Random();
-		int comsol[] = { 0, 0, 0 };
+
 		for (int i = 0; i < 3; i++) {
+			solution[i] = rd.nextInt(9) + 1;
 			for (int j = 0; j < i; j++) {
-				comsol[i] = rd.nextInt(9) + 1;
-				if (i > 0 && (comsol[i] == comsol[j])) {// Áßº¹µÈ °ªÀÌ ¾øÀÌ
+				if (solution[i] == solution[j]) {
 					i--;
+					break;
 				}
 			}
 		}
-		for (int i = 0; i < 3; i++) {
-			System.out.println(comsol.toString());
-		}
-
-		return comsol;
 	}
 
-	public void compar(String tf, int[] is) {
-		char[] tf_=tf.toCharArray();
-		int[] tf2 = null;
-		for(int i =0; i<tf_.length ; i++){
-			tf2[i] = Integer.parseInt(tf, tf.charAt(i));
-			System.out.println("tf2[i]");
+	public void compar(String textF, int[] solution) {
+		System.out.println("*");
+		char[] tf = textF.toCharArray();
+
+		for (int i = 0; i < tf.length; i++) {
+			myanswer[i] = (int) tf[i] - 48;// ë¬¸ì -> ìˆ«ìë¡œ
+			System.out.println(myanswer[i]);
+		} // ìˆ«ìë¡œ ë
+			// ====
+
+		for (int i = 0; i < tf.length; i++) {
+			for (int j = 0; j < tf.length; j++) {
+				if (myanswer[i] == solution[j]) {
+
+					if (i == j) {
+						sk++;
+					} else {
+						ball++;
+					}
+				}
+			}
+		} // sk ball ê³„ì‚° ë
+
+		if (sk + ball == 0) {// ë‹¤í‹€ë ¸ì„ ë•Œ
+			ta.append("\në‹¤ í‹€ë ¸ë‹¤");
+		} else if (sk == 3) {// ì •ë‹µ
+			ta.append("\nì •ë‹µì…ë‹ˆë‹¤");
+		} else {
+			ta.append("\nsk : " + sk + " ball : " + ball);
 		}
-		
+
 	}
 
 	@Override
@@ -104,12 +131,33 @@ public class NumberBaseBall extends JFrame implements ActionListener {
 		int i = 0, j = 0;
 		Object obj = e.getSource();
 		if (obj == tf) {
-			// »ç¿ëÀÚ°¡ »ı°¢ÇÏ´Â Á¤´ä
-			compar(tf.getText(),com_sol());
+			// ì‚¬ìš©ìê°€ ìƒê°í•˜ëŠ” ì •ë‹µ
+			sk = 0;
+			ball = 0;
+			if (solution != null) {// ëœë¤ ìˆ«ì ë°œìƒí•˜ì§€ ì•ŠìŒ
+				String tftest = tf.getText();
+				if (tftest.length() == 3) {// ì‚¬ì´ì¦ˆê°€ ì§€ì •ëœ ê²ƒë§Œ
+					compar(tftest, solution);
+					tf.setText("");
+				} else {
+					ta.append("\në¬¸ìì—´ì´ ë„ˆë¬´ ê¸¸ê±°ë‚˜ ì§§ìŠµë‹ˆë‹¤ [3ìë¦¿ìˆ˜]");
+				}
+			} else {
+				ta.append("\nëœë¤ ìˆ«ì ë°œìƒ ì•ˆí•¨.. ìƒˆ ê²Œì„ì„ ëˆŒëŸ¬ ì£¼ì„¸ìš”");
+			}
 
 		} else if (obj == b_new) {
 			System.out.println();
-			ta.setText("»õ °ÔÀÓÀÌ ½ÃÀÛµÇ¾ú½À´Ï´Ù");
+			random_Com();// ëœë¤ ìˆ«ì ë°œìƒ
+			sk = 0;
+			ball = 0;
+			ta.setText("ìƒˆ ê²Œì„ì´ ì‹œì‘ë˜ì—ˆìŠµë‹ˆë‹¤");
+		} else if (obj == b_solution) {
+			ta.append("\n" + Arrays.toString(solution));
+		} else if (obj == b_clear) {
+			ta.setText("");
+		} else if (obj == b_exit) {
+			System.exit(0);
 		}
 	}
 }
