@@ -9,7 +9,7 @@ public interface Table_Interface {
 	void modify(int index,Person p);
 
 	void delete(int index);
-
+	void search();
 	public Vector<Person> getPersons();
 	// void search();
 }

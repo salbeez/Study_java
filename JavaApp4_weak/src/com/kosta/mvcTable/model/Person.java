@@ -6,13 +6,17 @@ public class Person {
 	private String age;
 	private String job;
 	
+	public Person(String name, String age, String job) {
+		this.name = name;
+		this.age = age;
+		this.job = job;
+	}
 	public Person(int no,String name, String age, String job) {
 		this.No = no;
 		this.name = name;
 		this.age = age;
 		this.job = job;
 	}
-
 	public String getName() {
 		return name;
 	}

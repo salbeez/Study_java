@@ -3,31 +3,33 @@ package com.kosta.j0306;
 public class MatchesTest {
 
 	// boolean str.matches(String regex)
-	// regex´Â Á¤±Ô Ç¥Çö½Ä
-	// regex¸¦ ÅëÇØ Àü´ŞµÇ´Â ÆĞÅÏ¿¡ strÀÌ ºÎÇÕ µÇ¸é true¸®ÅÏ
+	// regexëŠ” ì •ê·œ í‘œí˜„ì‹
+	// regexë¥¼ í†µí•´ ì „ë‹¬ë˜ëŠ” íŒ¨í„´ì— strì´ ë¶€í•© ë˜ë©´ trueë¦¬í„´
 
 	public static void main(String[] args) {
 		String str = "b";
-		System.out.println(str.matches("[a]"));//a¹®ÀÚ ÇÑ¹ø
-		System.out.println(str.matches("[a]?"));// a¹®ÀÚ°¡ 0,1°ú ÇÑ¹øÀ» Ç¥ÇöÇÒ¶§
-		System.out.println(str.matches("[a]*"));//a¹®ÀÚ 0~¹«ÇÑ´ë
-		System.out.println(str.matches("[a]+"));//a¹®ÀÚ 1~¹«ÇÑ´ë
+		System.out.println(str.matches("[a]"));//aë¬¸ì í•œë²ˆ
+		System.out.println(str.matches("[a]?"));// aë¬¸ìê°€ 0,1ê³¼ í•œë²ˆì„ í‘œí˜„í• ë•Œ
+		System.out.println(str.matches("[a]*"));//aë¬¸ì 0~ë¬´í•œëŒ€
+		System.out.println(str.matches("[a]+"));//aë¬¸ì 1~ë¬´í•œëŒ€
 		
-		System.out.println(str.matches("[abc]"));//a or b or c Áß¿¡ ÇÑ¹ø ÃâÇö½Ã true
+		System.out.println(str.matches("[abc]"));//a or b or c ì¤‘ì— í•œë²ˆ ì¶œí˜„ì‹œ true
 		
-		String str2 = "gildong";	//¿µ¹®ÀÚ Ã¼Å©
+		String str2 = "gildong";	//ì˜ë¬¸ì ì²´í¬
 		
-		System.out.println(str2.matches("[a-z]+"));//¿µ¹®ÀÚ[¼Ò¹®ÀÚ] Á¶ÇÕ
+		System.out.println(str2.matches("[a-z]+"));//ì˜ë¬¸ì[ì†Œë¬¸ì] ì¡°í•©
 		
 		String su = "123456";
 		System.out.println(su.matches("[0-9]+"));
 		
-		String hangle = "³ªÇÑ±Û";
-		System.out.println(hangle.matches("[¤¡-ÆR]+"));
+		String hangle = "ë‚˜í•œê¸€";
+		System.out.println(hangle.matches("[ã„±-ï¿½R]+"));;
 		
-		//È¸¿ø °¡ÀÔ½Ã
+		String hangle2 = "ë‚˜í•œê¸€1123";
+		System.out.println(hangle.matches("[a-z]+"));
+		//íšŒì› ê°€ì…ì‹œ
 		String id = "gildong1004";
-//		id = 8~12ÀÚ¸® ÀÌ°í ¿µ¹®ÀÚ¿Í ¼ıÀÚ Á¶ÇÕ
+//		id = 8~12ìë¦¬ ì´ê³  ì˜ë¬¸ìì™€ ìˆ«ì ì¡°í•©
 		System.out.println(id.matches("[a-z0-9]{8,12}"));
 	}
 }

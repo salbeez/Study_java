@@ -17,17 +17,21 @@ public class Table_Method implements Table_Interface{
 	@Override
 	public void modify(int index,Person p) {
 		//몇번째인지... 선택후
-		System.out.println(person.size());
 		person.set(index, p);
 	}
 
 	@Override
-	public void delete(int index) {
+	public void delete(int index) {//input 다이얼 로그
 		// TODO Auto-generated method stub
 		person.remove(index);
 	}
 
 	public Vector<Person> getPersons(){
 		return person;
+	}
+	@Override
+	public void search() {
+		// TODO Auto-generated method stub
+		
 	}
 }
