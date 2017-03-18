@@ -8,10 +8,10 @@ import javax.swing.*;
 import com.sun.org.apache.xml.internal.security.Init;
 
 public class TableInput_View extends JFrame {
-	JLabel la_name,la_age,la_job;
+	private JLabel la_name,la_age,la_job;
 	public JTextField t_name,t_age,t_job;
 	public JButton b_input,b_cancel;
-	JPanel p,p2,p3,p4;
+	private JPanel p,p2,p3,p4;
 	
 	public TableInput_View() {//»ý¼ºÀÚ
 		init_obj();

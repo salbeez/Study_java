@@ -1,10 +1,13 @@
 package com.kosta.mvcTable.model;
 
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //model
 public class Table_Method implements Table_Interface{
 	private Vector<Person> person;
+	private Vector<Person> selectionPerson;
 	public Table_Method() {
 		person = new Vector<>();
 	}
@@ -30,8 +33,22 @@ public class Table_Method implements Table_Interface{
 		return person;
 	}
 	@Override
-	public void search() {
-		// TODO Auto-generated method stub
+	public Vector<Person> section_Search(int section,String str) {
+		selectionPerson = new Vector<>();
+		Pattern p = null;
+		String matching_Str=null;
+		if(section == 0){ // "^" 해당 문자로 시작하는 이름을 검색
+			p = Pattern.compile("^"+str);
+		}else{
+			p = Pattern.compile(str+"+");
+		}
 		
+		for(int i =0; i<person.size();i++){
+			Matcher m = p.matcher(person.get(i).getName());
+			if(m.find()){	//해당 값을 찾으면 벡터에 넣는다
+				selectionPerson.add(person.get(i));
+			}
+		}
+		return selectionPerson;
 	}
 }
