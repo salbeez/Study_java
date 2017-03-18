@@ -47,6 +47,7 @@ public class Controller implements ActionListener {
 		eventUp();
 
 		main_v.bt_update.setEnabled(false);
+		main_v.bt_del.setEnabled(false);
 	}
 
 	private void eventUp() {
@@ -111,9 +112,9 @@ public class Controller implements ActionListener {
 
 	private boolean validity(String name, String age, String job) {
 
-		if (name.equals("") && age.equals("") && job.equals("")) {// 셋중에 하나라도
-																	// 안썼다면
+		if (name.equals("") || age.equals("") || job.equals("")) {// 셋중에 하나라도														// 안썼다면
 			return false;
+			
 		} else if (!age.matches("[0-9]+")) {// 나이 입력 창에 문자를 썼다면
 			if (input_v.isVisible()) {
 				JOptionPane.showMessageDialog(input_v, "나이는 숫자로 써주세요");
@@ -161,6 +162,7 @@ public class Controller implements ActionListener {
 
 			if (validity(name, age, job)) {
 				model.input(new Person(++count, name, age, job));
+				main_v.bt_del.setEnabled(true);
 			}
 
 			display(model.getPersons());// 출력
@@ -211,10 +213,14 @@ public class Controller implements ActionListener {
 		}
 		else if(obj == selection_v.bt_Search_Submit){
 			int section = selection_v.combo_Search.getSelectedIndex();//콤보 박스에서 선택한 인덱스
-			
-			Vector<Person> selectpersons= model.section_Search(section,selection_v.tf_Search.getText());
-			display(selectpersons);
-			
+
+			if(selection_v.tf_Search.getText().length()>0){//TextF에 문자열을 썼다면
+				Vector<Person> selectpersons= model.section_Search(section,selection_v.tf_Search.getText());
+				display(selectpersons);				
+			}else{
+				JOptionPane.showMessageDialog(selection_v, "아무 문자열도 쓰지 않았습니다");
+			}
+			selection_v.tf_Search.setText("");
 			main_v.setVisible(true);
 			selection_v.setVisible(false);
 		}
