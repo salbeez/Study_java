@@ -17,8 +17,9 @@ public class TableMain_View extends JFrame {
 	public JButton bt_selectPersons;
 	public JTable table;
 	public DefaultTableModel model;
-	JScrollPane scroll;
-	JPanel p;
+	
+	private JScrollPane scroll;
+	private JPanel p;
 
 	public TableMain_View() {
 		init();

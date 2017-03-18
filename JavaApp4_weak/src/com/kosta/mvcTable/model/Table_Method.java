@@ -29,7 +29,7 @@ public class Table_Method implements Table_Interface{
 		person.remove(index);
 	}
 
-	public Vector<Person> getPersons(){
+	public Vector<Person> getPersons(){//전체 데이터 리턴
 		return person;
 	}
 	@Override

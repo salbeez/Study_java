@@ -29,25 +29,30 @@ import com.kosta.mvcTable.view.TableUpdate_View;
 //6. 인증 or 보안
 public class Controller implements ActionListener {
 
-	TableMain_View main_v;
-	TableInput_View input_v;
-	TableUpdate_View update_v;
-	TableSelection_View selection_v;
-	Table_Interface model;
+	private TableMain_View main_v;
+	private TableInput_View input_v;
+	private TableUpdate_View update_v;
+	private TableSelection_View selection_v;
+	private Table_Interface model;
 	
 	private int count = 0;
 
 	public Controller() {
 		// TODO Auto-generated constructor stub
+		init();
+		eventUp();
+
+		main_v.bt_update.setEnabled(false);
+		main_v.bt_del.setEnabled(false);
+	}
+
+	private void init() {
+		// TODO Auto-generated method stub
 		main_v = new TableMain_View();
 		input_v = new TableInput_View();
 		update_v = new TableUpdate_View();
 		selection_v = new TableSelection_View();
 		model = new Table_Method();
-		eventUp();
-
-		main_v.bt_update.setEnabled(false);
-		main_v.bt_del.setEnabled(false);
 	}
 
 	private void eventUp() {
@@ -100,8 +105,8 @@ public class Controller implements ActionListener {
 		new Controller();
 	}
 
-	public void display(Vector<Person> whatperson) {//부분검색이된 person이냐 아니면 전체적인 person인가..
-		Vector<Person> v = whatperson;
+	public void display(Vector<Person> whatpersons) {//부분검색이된 person이냐 아니면 전체적인 person인가..
+		Vector<Person> v = whatpersons;
 		main_v.model.setRowCount(0);
 		for (int i = 0; i < v.size(); i++) {
 			Person p = v.get(i);
@@ -141,6 +146,7 @@ public class Controller implements ActionListener {
 		if (obj == main_v.bt_input) {// 메인 -> 입력창
 			main_v.setVisible(false);
 			input_v.setVisible(true);
+			
 		} else if (obj == main_v.bt_update) {// 메인 => 수정창
 			main_v.setVisible(false);
 			update_v.setVisible(true);
@@ -148,6 +154,7 @@ public class Controller implements ActionListener {
 		} else if(obj == main_v.bt_selectName){ //메인 -> 검색창
 			main_v.setVisible(false);
 			selection_v.setVisible(true);
+			
 		} else if(obj == main_v.bt_selectPersons){ //전체검색
 			if(main_v.table.getRowCount()!=0){//테이블 목록이 전부 비워져 있지 않다면
 				display(model.getPersons());//전체 출력
@@ -160,7 +167,7 @@ public class Controller implements ActionListener {
 			String age = input_v.t_age.getText();
 			String job = input_v.t_job.getText();
 
-			if (validity(name, age, job)) {
+			if (validity(name, age, job)) {// 작성한 값이 유효한지 검사
 				model.input(new Person(++count, name, age, job));
 				main_v.bt_del.setEnabled(true);
 			}
@@ -215,8 +222,13 @@ public class Controller implements ActionListener {
 			int section = selection_v.combo_Search.getSelectedIndex();//콤보 박스에서 선택한 인덱스
 
 			if(selection_v.tf_Search.getText().length()>0){//TextF에 문자열을 썼다면
-				Vector<Person> selectpersons= model.section_Search(section,selection_v.tf_Search.getText());
-				display(selectpersons);				
+				if( !selection_v.tf_Search.getText().matches("[0-9]+")){//문자를 사용했을시
+					Vector<Person> selectpersons= model.section_Search(section,selection_v.tf_Search.getText());
+					display(selectpersons);		
+				}else{
+					JOptionPane.showMessageDialog(selection_v, "숫자를 사용하시면 안됩니다");
+				}
+						
 			}else{
 				JOptionPane.showMessageDialog(selection_v, "아무 문자열도 쓰지 않았습니다");
 			}
@@ -225,7 +237,7 @@ public class Controller implements ActionListener {
 			selection_v.setVisible(false);
 		}
 		else if (obj == main_v.bt_exit) {// 종료
-			//
+			System.exit(0);
 		}
 	}
 }

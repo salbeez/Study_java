@@ -12,7 +12,7 @@ public class TableSelection_View extends JFrame {
 	public JButton bt_Search_Submit;
 	public JButton bt_Search_Cancel;
 	
-	JLabel la_Search;
+	private JLabel la_Search;
 	private JPanel searchP,searchP2;
 	
 	public TableSelection_View() {
