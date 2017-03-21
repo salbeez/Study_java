@@ -100,6 +100,7 @@ public class NotePad extends JFrame implements ActionListener {
 				String byteToString = new String(b, 0, i);
 				ta.append(byteToString);
 			}
+			fis.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,10 +114,10 @@ public class NotePad extends JFrame implements ActionListener {
 			File savetFile = chooser.getSelectedFile();
 			fos = new FileOutputStream(savetFile);
 
-			int i = 0, j = 0;
+//			int i = 0, j = 0;
 			byte c[]=ta.getText().getBytes();// ta에 있는 값을 전부 바꾸고
 			fos.write(c);
-
+			fos.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
