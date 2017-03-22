@@ -14,12 +14,12 @@ import javax.swing.*;
 
 public class NotePad extends JFrame implements ActionListener {
 
-	JMenuBar menubar;
-	JMenu file, help;
-	JMenuItem file_open, file_save, file_exit;
-	JScrollPane scroll;
-	JTextArea ta;
-	JFileChooser chooser;
+	private JMenuBar menubar;
+	private JMenu file, help;
+	private JMenuItem file_open, file_save, file_exit;
+	private JScrollPane scroll;
+	private JTextArea ta;
+	private JFileChooser chooser;
 
 	FileInputStream fis;
 	FileOutputStream fos;
