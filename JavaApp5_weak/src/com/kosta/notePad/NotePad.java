@@ -11,6 +11,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class NotePad extends JFrame implements ActionListener {
 
@@ -84,6 +85,10 @@ public class NotePad extends JFrame implements ActionListener {
 	}
 
 	public void fromFile() {// 파일을 읽어서 ta에 출력
+		FileNameExtensionFilter filter = //모든파일을 보여주지 않고
+				new FileNameExtensionFilter("텍스트 파일","txt","java");
+		chooser.setFileFilter(filter);
+		
 		int result = chooser.showOpenDialog(this);
 		if (result != JFileChooser.APPROVE_OPTION) {
 			return;
@@ -100,10 +105,19 @@ public class NotePad extends JFrame implements ActionListener {
 				String byteToString = new String(b, 0, i);
 				ta.append(byteToString);
 			}
-			fis.close();
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				if (fis != null) {
+					fis.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -113,12 +127,22 @@ public class NotePad extends JFrame implements ActionListener {
 		try {
 			File savetFile = chooser.getSelectedFile();// 파일 정보를 받고
 			fos = new FileOutputStream(savetFile); // 그 정보에 대한 파일의 생성 또는 열고
-			byte c[]=ta.getText().getBytes();// ta에 있는 값을 전부 바꾸고
+//			String str = ta.getText().replaceAll("\n", "\r\n");으로 해주면 커서 내리고 왼쪽으로 땡길수 있다
+			
+			byte c[] = ta.getText().getBytes();// ta에 있는 값을 전부 바꾸고
 			fos.write(c);
-			fos.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				if (fos != null) {// 파일을 생성하지 못했다면
+					fos.close();
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
