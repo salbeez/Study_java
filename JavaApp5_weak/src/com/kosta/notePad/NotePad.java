@@ -111,10 +111,8 @@ public class NotePad extends JFrame implements ActionListener {
 		chooser.showSaveDialog(this);
 
 		try {
-			File savetFile = chooser.getSelectedFile();
-			fos = new FileOutputStream(savetFile);
-
-//			int i = 0, j = 0;
+			File savetFile = chooser.getSelectedFile();// 파일 정보를 받고
+			fos = new FileOutputStream(savetFile); // 그 정보에 대한 파일의 생성 또는 열고
 			byte c[]=ta.getText().getBytes();// ta에 있는 값을 전부 바꾸고
 			fos.write(c);
 			fos.close();
