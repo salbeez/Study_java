@@ -138,7 +138,13 @@ public class Controll implements ActionListener {
 			index = 7;
 		} else if (obj == admin_view.bt_summit) {
 			System.out.println("전송");
-			model.exchangeWirte();
+			String money[]= new String[4];
+			money[0] = admin_view.tf_one.getText();
+			money[1] = admin_view.tf_five.getText();
+			money[2] = admin_view.tf_ten.getText();
+			money[3] = admin_view.tf_fifty.getText();
+			
+			model.exchangeWirte(money);
 			// exchange.txt
 		} else {// 나머지 16개의 버튼
 			JButton bt = (JButton) obj;

@@ -61,7 +61,7 @@ public class Mothod_Model {
 		String strArr[] = str.split(",");
 		return strArr;
 	}
-	public void exchangeWirte(){}
+	public void exchangeWirte(String money[]){}
 	// 매출액.....차트용
 	public DefaultCategoryDataset getDataSet(int selectFile) {
 
