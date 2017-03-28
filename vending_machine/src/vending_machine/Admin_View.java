@@ -1,13 +1,17 @@
 package vending_machine;
 
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartPanel;
@@ -28,8 +32,15 @@ import org.jfree.ui.TextAnchor;
 
 public class Admin_View extends JFrame {
 
-	public JButton bt_day, bt_weak, bt_year;
+	public JButton bt_day, bt_weak, bt_year,bt_img;
 	JPanel p;
+	
+	public JButton  bt_vet1, bt_vet2, bt_vet3, bt_vet4, bt_vet5,bt_vet6, bt_vet7, bt_vet8, bt_re;
+	JLabel la_one, la_five, la_ten, la_fifty, la_sum;
+	public JTextField tf_one, tf_five, tf_ten, tf_fifty, tf_sum;
+
+	JPanel panel_vet, p_won1, p_won2, p_won3, p_won4,p_wSum, panel_admin;
+	JPanel p_big1, p_big2, p_leftDown, p_rightTop, p_rightDown;
 	// =========================================
 	public JFreeChart chart;
 	public ChartPanel cp;
@@ -37,7 +48,7 @@ public class Admin_View extends JFrame {
 	public Admin_View() {
 		init();
 		setting();
-		setSize(300, 300);
+		setSize(600, 550);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
@@ -46,39 +57,140 @@ public class Admin_View extends JFrame {
 		bt_day = new JButton("일");
 		bt_weak = new JButton("월");
 		bt_year = new JButton("월간");
-
+		bt_img = new JButton("농산물");
 		p = new JPanel();
-
+		
+		bt_vet1 = new JButton("야채1");
+		bt_vet2 = new JButton("야채2");
+		bt_vet3 = new JButton("야채3");
+		bt_vet4 = new JButton("야채4");
+		bt_vet5 = new JButton("야채5");
+		bt_vet6 = new JButton("야채6");
+		bt_vet7 = new JButton("야채7");
+		bt_vet8 = new JButton("야채8");
+		panel_vet = new JPanel();
+		p_leftDown = new JPanel();//==========
+		
+		la_one= new  JLabel("1,000원");
+		tf_one = new  JTextField(3);
+		p_won1 = new JPanel();//=====>1
+		
+		la_five = new  JLabel("5,000원");
+		tf_five = new  JTextField(3);
+		p_won2 = new JPanel();
+		
+		la_ten = new  JLabel("10,000원");
+		tf_ten = new  JTextField(3);
+		p_won3 = new JPanel();
+		
+		la_fifty = new  JLabel("50,000원");
+		tf_fifty = new  JTextField(3);
+		p_won4 = new JPanel();
+		
+		la_sum = new  JLabel("총액수");
+		tf_sum = new  JTextField(7);
+		p_wSum = new JPanel();
+		p_rightTop = new  JPanel();//==========
+		
+		bt_re = new JButton("돌아가기");
+		p_rightDown = new JPanel();//==========
+		
+		p_big1 = new JPanel();
+		p_big2 = new JPanel();
+		
 	}
 
 	private void setting() {
-		p.setLayout(new FlowLayout());
+		setTitle("관리자모드");
+		
+		p.setLayout(new FlowLayout());//==============LEFTDOWN 패널 시작
 		p.add(bt_day);
 		p.add(bt_weak);
 		p.add(bt_year);
-
-		setLayout(new FlowLayout());
+		p.add(bt_img);
 		
-//		chart =getChart();//차트를 리턴 받아서
+		panel_vet.setLayout(new GridLayout(2,4,10,30));
+		panel_vet.add(bt_vet1);
+		panel_vet.add(bt_vet2);
+		panel_vet.add(bt_vet3);
+		panel_vet.add(bt_vet4);
+		panel_vet.add(bt_vet5);
+		panel_vet.add(bt_vet6);
+		panel_vet.add(bt_vet7);
+		panel_vet.add(bt_vet8);
+		
+		p_leftDown.setLayout(new FlowLayout());
+		p_leftDown.add(p);
+		p_leftDown.add(panel_vet);//==================LEFTDOWN 패널 끝
+		
+		p_won1.setLayout(new FlowLayout());
+		p_won1.add(la_one);
+		p_won1.add(tf_one);
+		
+		p_won2.setLayout(new FlowLayout());
+		p_won2.add(la_five);
+		p_won2.add(tf_five);
+		
+		p_won3.setLayout(new FlowLayout());
+		p_won3.add(la_ten);
+		p_won3.add(tf_ten);
+		
+		p_won4.setLayout(new FlowLayout());
+		p_won4.add(la_fifty);
+		p_won4.add(tf_fifty);
+		
+		p_wSum.setLayout(new FlowLayout());
+		p_wSum.add(la_sum);
+		p_wSum.add(tf_sum);
+		
+		p_rightTop.setLayout(new FlowLayout());
+		p_rightTop.add(p_won1);
+		p_rightTop.add(p_won2);
+		p_rightTop.add(p_won3);
+		p_rightTop.add(p_won4);
+		p_rightTop.add(p_wSum);
+		
+		p_rightDown.setLayout(new BorderLayout());
+		p_rightDown.add("South",bt_re);
+		
+		setLayout(null);
+		p_big1.setBounds(20, 20, 400, 500);
+		p_big1.setBackground(Color.BLUE);
+		p_big1.setLayout(new GridLayout(2, 1));
 		cp = new ChartPanel(chart);
-		cp.setSize(300,100);
-		add(cp);// 차트부분
-		add(p);
+		cp.setSize(400,300);
+		p_big1.add(cp);// 차트부분
+		p_big1.add(p_leftDown);
+		
+		p_big2.setBounds(420, 20, 200, 500);
+		p_big2.setBackground(Color.ORANGE);
+		p_big2.setLayout(new GridLayout(2, 1));
+		p_big2.add(p_rightTop);
+		p_big2.add(p_rightDown);
+		
+		add(p_big1);
+		add(p_big2);
+		setBounds(20, 20, 500, 500);
+		
+		
+		
 	}
 
+	
+	
 	public JFreeChart getChart(DefaultCategoryDataset dataset) {
 
 //		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		// 데이터 입력 ( 값, 범례, 카테고리 )정수실수,String,String
 		// 그래프
 	
-
-		final LineAndShapeRenderer renderer = new LineAndShapeRenderer();
+		
+		/*final*/ LineAndShapeRenderer renderer = new LineAndShapeRenderer();
 
 		// 공통 옵션 정의
-		final CategoryItemLabelGenerator generator = new StandardCategoryItemLabelGenerator();
-		final ItemLabelPosition p_center = new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER);
-		final ItemLabelPosition p_below = new ItemLabelPosition(ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_LEFT);
+		/*final*/ CategoryItemLabelGenerator generator = new StandardCategoryItemLabelGenerator();
+		/*final*/ ItemLabelPosition p_center = new ItemLabelPosition(ItemLabelAnchor.CENTER, TextAnchor.CENTER);
+		/*final*/ ItemLabelPosition p_below = new ItemLabelPosition(ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_LEFT);
 		Font f = new Font("Gulim", Font.BOLD, 14);
 		Font axisF = new Font("Gulim", Font.PLAIN, 14);
 
@@ -95,7 +207,7 @@ public class Admin_View extends JFrame {
 		renderer.setSeriesStroke(0, new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 3.0f));
 
 		// plot 생성
-		final CategoryPlot plot = new CategoryPlot();
+		/*final*/ CategoryPlot plot = new CategoryPlot();
 		plot.setDataset(1, dataset);
 		plot.setRenderer(1, renderer);
 
@@ -120,7 +232,7 @@ public class Admin_View extends JFrame {
 		plot.getRangeAxis().setTickLabelFont(axisF); // Y축 눈금라벨 폰트 조정
 
 		// 세팅된 plot을 바탕으로 chart 생성
-		final JFreeChart chart = new JFreeChart(plot);
+		/*final*/ JFreeChart chart = new JFreeChart(plot);
 		// chart.setTitle("Overlaid Bar Chart"); // 차트 타이틀
 		// TextTitle copyright = new TextTitle("JFreeChart WaferMapPlot", new
 		// Font("SansSerif", Font.PLAIN, 9));
