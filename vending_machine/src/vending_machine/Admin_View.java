@@ -172,6 +172,7 @@ public class Admin_View extends JFrame {
 		add(p_big1);
 		add(p_big2);
 		setBounds(20, 20, 500, 500);
+		
 
 	}
 

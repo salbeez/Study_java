@@ -32,13 +32,18 @@ public class ObjectWriteTest {
 				
 				System.out.print("채소 이름 :");
 				String name = br.readLine();
-				System.out.print("가격 :");
 				
+				System.out.print("가격 :");
 				int price = Integer.parseInt(br.readLine());
+				
+				System.out.print("재고량 :");
+				int remains = Integer.parseInt(br.readLine());
+				
 				System.out.print("생산자 :");
 				String pro = br.readLine();
 				
-				Vegitable p = new Vegitable(name,price,pro);
+				
+				Vegitable p = new Vegitable(name,price,remains,pro);
 				oos.writeObject(p);
 			}
 
@@ -55,7 +60,7 @@ public class ObjectWriteTest {
 				System.out.println("\t\tcount : " + count);
 				Vegitable p_read = (Vegitable) ois.readObject();
 				
-				System.out.println("채소이름 :"+p_read.getName()+" 가격 : "+p_read.getPrice()+" 생산자 : "+p_read.farmer);				
+				System.out.println("채소이름 :"+p_read.getName()+" 가격 : "+p_read.getPrice()+" 재고량 : "+p_read.getRemains()+" 생산자 : "+p_read.farmer);				
 //				System.out.println("주 : " + p_read.getCalendar());
 //				System.out.println("매출액 : " + p_read.getRevenue());// 매출액
 			}

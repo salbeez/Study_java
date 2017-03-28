@@ -1,8 +1,11 @@
 package vending_machine;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.ObjectInputStream;
 import java.util.Vector;
 
@@ -15,8 +18,8 @@ public class Mothod_Model {
 
 	Vector<Revenue_Year> v;
 	Vector<Vegitable> framItems;// 총 아이템의 정보
-	
-	public Vector<Vegitable> readFarmItems(){
+
+	public Vector<Vegitable> readFarmItems() {
 		framItems = new Vector<>();
 		File file = new File("framItems.ser");// 파일 정보 가져오고
 		FileInputStream fis;
@@ -30,7 +33,8 @@ public class Mothod_Model {
 				System.out.println("\t\tcount : " + count);
 				Vegitable p_read = (Vegitable) ois.readObject();
 				framItems.add(p_read);
-				System.out.println("채소이름 :"+p_read.getName()+" 가격 : "+p_read.getPrice()+" 생산자 : "+p_read.farmer);				
+				System.out.println(
+						"채소이름 :" + p_read.getName() + " 가격 : " + p_read.getPrice() + " 생산자 : " + p_read.farmer);
 			}
 
 			fis.close();
@@ -38,11 +42,26 @@ public class Mothod_Model {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// 파일에 있는 정보를 가져오고
-	
+		} // 파일에 있는 정보를 가져오고
+
 		return framItems;
 	}
-	
+
+	public String[] exchangeRead() {
+		File file = new File("exchange.txt");// 파일 정보 가져오고
+		FileInputStream fis;
+		String str = null;
+
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(file));
+			str = in.readLine();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String strArr[] = str.split(",");
+		return strArr;
+	}
+	public void exchangeWirte(){}
 	// 매출액.....차트용
 	public DefaultCategoryDataset getDataSet(int selectFile) {
 
@@ -89,12 +108,12 @@ public class Mothod_Model {
 					Revenue_Year p_read = (Revenue_Year) ois.readObject();
 					v.add(p_read);
 				}
-				
-				for(int i=v.size()-7; i<v.size(); i++){
+
+				for (int i = v.size() - 7; i < v.size(); i++) {
 					dataset.addValue(v.get(i).getRevenue(), str[0],
 							v.get(i).getCalendar().substring(startIdx, endIdx) + str[1]);
 				}
-				
+
 			} else {
 				while ((count = fis.available()) > 0) {
 					Revenue_Year p_read = (Revenue_Year) ois.readObject();

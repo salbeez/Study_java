@@ -54,12 +54,26 @@ public class Controll implements ActionListener {
 		for (int i = 0; i < 8; i++) {
 			sellItems.add(null);
 		}
+
+		String arrayStr[] = model.exchangeRead();
+		admin_view.tf_one.setText(arrayStr[0]);
+		admin_view.tf_five.setText(arrayStr[1]);
+		admin_view.tf_ten.setText(arrayStr[2]);
+		admin_view.tf_fifty.setText(arrayStr[3]);
+		
+		int total=0;
+		total += (Integer.parseInt(arrayStr[0]) * 1000); 
+		total += (Integer.parseInt(arrayStr[1]) * 5000); 
+		total += (Integer.parseInt(arrayStr[2]) * 10000); 
+		total += (Integer.parseInt(arrayStr[3]) * 50000); 
+		admin_view.tf_sum.setText(""+total);
 	}
 
 	private void eventUp() {
 		admin_view.bt_day.addActionListener(this);
 		admin_view.bt_weak.addActionListener(this);
 		admin_view.bt_year.addActionListener(this);
+		admin_view.bt_summit.addActionListener(this);
 
 		for (int i = 0; i < farm_view.bt.length; i++) {
 			farm_view.bt[i].addActionListener(this);
@@ -122,7 +136,11 @@ public class Controll implements ActionListener {
 			admin_view.setVisible(false);
 			farm_view.setVisible(true);
 			index = 7;
-		} else {//나머지 16개의 버튼
+		} else if (obj == admin_view.bt_summit) {
+			System.out.println("전송");
+			model.exchangeWirte();
+			// exchange.txt
+		} else {// 나머지 16개의 버튼
 			JButton bt = (JButton) obj;
 			int i = Integer.parseInt(bt.getLabel()) - 1;//
 			sellItems.set(index, farmItems.get(i));
