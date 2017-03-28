@@ -32,10 +32,11 @@ import org.jfree.ui.TextAnchor;
 
 public class Admin_View extends JFrame {
 
-	public JButton bt_day, bt_weak, bt_year,bt_img;
+	public JButton bt_day, bt_weak, bt_year;
 	JPanel p;
 	
-	public JButton  bt_vet1, bt_vet2, bt_vet3, bt_vet4, bt_vet5,bt_vet6, bt_vet7, bt_vet8, bt_re;
+	public JButton  bt_vet[] = new JButton[8];
+	public JButton bt_re,bt_summit;// 유저뷰로 돌아가기,잔고 세팅
 	JLabel la_one, la_five, la_ten, la_fifty, la_sum;
 	public JTextField tf_one, tf_five, tf_ten, tf_fifty, tf_sum;
 
@@ -57,17 +58,16 @@ public class Admin_View extends JFrame {
 		bt_day = new JButton("일");
 		bt_weak = new JButton("월");
 		bt_year = new JButton("월간");
-		bt_img = new JButton("농산물");
 		p = new JPanel();
 		
-		bt_vet1 = new JButton("야채1");
-		bt_vet2 = new JButton("야채2");
-		bt_vet3 = new JButton("야채3");
-		bt_vet4 = new JButton("야채4");
-		bt_vet5 = new JButton("야채5");
-		bt_vet6 = new JButton("야채6");
-		bt_vet7 = new JButton("야채7");
-		bt_vet8 = new JButton("야채8");
+		bt_vet[0] = new JButton("야채1");
+		bt_vet[1] = new JButton("야채2");
+		bt_vet[2] = new JButton("야채3");
+		bt_vet[3] = new JButton("야채4");
+		bt_vet[4] = new JButton("야채5");
+		bt_vet[5] = new JButton("야채6");
+		bt_vet[6] = new JButton("야채7");
+		bt_vet[7] = new JButton("야채8");
 		panel_vet = new JPanel();
 		p_leftDown = new JPanel();//==========
 		
@@ -90,6 +90,7 @@ public class Admin_View extends JFrame {
 		la_sum = new  JLabel("총액수");
 		tf_sum = new  JTextField(7);
 		p_wSum = new JPanel();
+		bt_summit= new JButton("현금 세팅");
 		p_rightTop = new  JPanel();//==========
 		
 		bt_re = new JButton("돌아가기");
@@ -107,21 +108,20 @@ public class Admin_View extends JFrame {
 		p.add(bt_day);
 		p.add(bt_weak);
 		p.add(bt_year);
-		p.add(bt_img);
 		
-		panel_vet.setLayout(new GridLayout(2,4,10,30));
-		panel_vet.add(bt_vet1);
-		panel_vet.add(bt_vet2);
-		panel_vet.add(bt_vet3);
-		panel_vet.add(bt_vet4);
-		panel_vet.add(bt_vet5);
-		panel_vet.add(bt_vet6);
-		panel_vet.add(bt_vet7);
-		panel_vet.add(bt_vet8);
+		panel_vet.setLayout(new GridLayout(2,4,10,50));
+		panel_vet.add(bt_vet[0]);
+		panel_vet.add(bt_vet[1]);
+		panel_vet.add(bt_vet[2]);
+		panel_vet.add(bt_vet[3]);
+		panel_vet.add(bt_vet[4]);
+		panel_vet.add(bt_vet[5]);
+		panel_vet.add(bt_vet[6]);
+		panel_vet.add(bt_vet[7]);
 		
-		p_leftDown.setLayout(new FlowLayout());
-		p_leftDown.add(p);
-		p_leftDown.add(panel_vet);//==================LEFTDOWN 패널 끝
+		p_leftDown.setLayout(new BorderLayout());
+		p_leftDown.add("North",p);
+		p_leftDown.add("Center",panel_vet);//==================LEFTDOWN 패널 끝
 		
 		p_won1.setLayout(new FlowLayout());
 		p_won1.add(la_one);
@@ -149,6 +149,7 @@ public class Admin_View extends JFrame {
 		p_rightTop.add(p_won3);
 		p_rightTop.add(p_won4);
 		p_rightTop.add(p_wSum);
+		p_rightTop.add(bt_summit);
 		
 		p_rightDown.setLayout(new BorderLayout());
 		p_rightDown.add("South",bt_re);
@@ -171,9 +172,7 @@ public class Admin_View extends JFrame {
 		add(p_big1);
 		add(p_big2);
 		setBounds(20, 20, 500, 500);
-		
-		
-		
+
 	}
 
 	

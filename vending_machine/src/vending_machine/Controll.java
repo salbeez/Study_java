@@ -31,6 +31,8 @@ public class Controll implements ActionListener {
 	Vector<Vegitable> farmItems;// 총 아이템의 정보
 	Vector<Vegitable> sellItems;// 판매할 아이템의 정보
 
+	int index;
+
 	public Controll() {
 		init();
 		setting();
@@ -42,45 +44,29 @@ public class Controll implements ActionListener {
 		farm_view = new farmItem_View();
 		model = new Mothod_Model();
 
-		sellItems = new Vector<>();
+		sellItems = new Vector<>(8);
 	}
 
 	private void setting() {
 		farmItems = model.readFarmItems();
-		System.out.println(farmItems.size());
+
+		for (int i = 0; i < 8; i++) {
+			sellItems.add(null);
+		}
 	}
 
 	private void eventUp() {
 		admin_view.bt_day.addActionListener(this);
 		admin_view.bt_weak.addActionListener(this);
 		admin_view.bt_year.addActionListener(this);
-		admin_view.bt_img.addActionListener(this);
 
-		farm_view.bt[0].addActionListener(this);
-		farm_view.bt[1].addActionListener(this);
-		farm_view.bt[2].addActionListener(this);
-		farm_view.bt[3].addActionListener(this);
-		farm_view.bt[4].addActionListener(this);
-		farm_view.bt[5].addActionListener(this);
-		farm_view.bt[6].addActionListener(this);
-		farm_view.bt[7].addActionListener(this);
-		farm_view.bt[8].addActionListener(this);
-		farm_view.bt[9].addActionListener(this);
-		farm_view.bt[10].addActionListener(this);
-		farm_view.bt[11].addActionListener(this);
-		farm_view.bt[12].addActionListener(this);
-		farm_view.bt[13].addActionListener(this);
-		farm_view.bt[14].addActionListener(this);
-		farm_view.bt[15].addActionListener(this);
-
-		admin_view.bt_vet1.addActionListener(this);
-		admin_view.bt_vet2.addActionListener(this);
-		admin_view.bt_vet3.addActionListener(this);
-		admin_view.bt_vet4.addActionListener(this);
-		admin_view.bt_vet5.addActionListener(this);
-		admin_view.bt_vet6.addActionListener(this);
-		admin_view.bt_vet7.addActionListener(this);
-		admin_view.bt_vet8.addActionListener(this);
+		for (int i = 0; i < farm_view.bt.length; i++) {
+			farm_view.bt[i].addActionListener(this);
+		}
+		for (int i = 0; i < admin_view.bt_vet.length; i++) {
+			admin_view.bt_vet[i].setFont(admin_view.bt_vet[i].getFont().deriveFont(15.0f));
+			admin_view.bt_vet[i].addActionListener(this);
+		}
 
 		farm_view.addWindowListener(new WindowAdapter() {
 			// 입력창 x버튼-->메인
@@ -94,7 +80,6 @@ public class Controll implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-
 		if (obj == admin_view.bt_day) {
 			// 저장된 파일에서 최근 1주일
 			admin_view.chart = admin_view.getChart(model.getDataSet(3));
@@ -103,37 +88,52 @@ public class Controll implements ActionListener {
 			admin_view.chart = admin_view.getChart(model.getDataSet(2));
 		} else if (obj == admin_view.bt_year) {
 			admin_view.chart = admin_view.getChart(model.getDataSet(1));
-		} else if (obj == admin_view.bt_img) {
+		} else if (obj == admin_view.bt_vet[0]) {
 			admin_view.setVisible(false);
 			farm_view.setVisible(true);
-
-		} else if (obj == admin_view.bt_vet1) {
-
-		} else if (obj == admin_view.bt_vet2) {
-
-		} else if (obj == admin_view.bt_vet3) {
-
-		} else if (obj == admin_view.bt_vet4) {
-
-		} else if (obj == admin_view.bt_vet5) {
-
-		} else if (obj == admin_view.bt_vet6) {
-
-		} else if (obj == admin_view.bt_vet7) {
-
-		} else if (obj == admin_view.bt_vet8) {
-
-		} else {
+			index = 0;
+		} else if (obj == admin_view.bt_vet[1]) {
+			admin_view.setVisible(false);
+			farm_view.setVisible(true);
+			index = 1;
+		} else if (obj == admin_view.bt_vet[2]) {
+			admin_view.setVisible(false);
+			farm_view.setVisible(true);
+			index = 2;
+		} else if (obj == admin_view.bt_vet[3]) {
+			admin_view.setVisible(false);
+			farm_view.setVisible(true);
+			index = 3;
+		} else if (obj == admin_view.bt_vet[4]) {
+			admin_view.setVisible(false);
+			farm_view.setVisible(true);
+			index = 4;
+			System.out.println("****");
+		} else if (obj == admin_view.bt_vet[5]) {
+			admin_view.setVisible(false);
+			farm_view.setVisible(true);
+			index = 5;
+		} else if (obj == admin_view.bt_vet[6]) {
+			admin_view.setVisible(false);
+			farm_view.setVisible(true);
+			index = 6;
+		} else if (obj == admin_view.bt_vet[7]) {
+			admin_view.setVisible(false);
+			farm_view.setVisible(true);
+			index = 7;
+		} else {//나머지 16개의 버튼
 			JButton bt = (JButton) obj;
 			int i = Integer.parseInt(bt.getLabel()) - 1;//
-			sellItems.add(farmItems.get(i));
-			// sellItems.set----------
-			System.out.println(sellItems.size());// 판매할 아이템의 수
+			sellItems.set(index, farmItems.get(i));
+			admin_view.bt_vet[index].setLabel(sellItems.get(index).getName());
+			System.out.println("판매할 이이템의 수 : " + sellItems.size());// 판매할 아이템의 수
 			farm_view.setVisible(false);
 			admin_view.setVisible(true);
 
 			for (int j = 0; j < sellItems.size(); j++) {
-				System.out.println(sellItems.get(j).getName());
+				if (sellItems.get(j) != null) {
+					System.out.println(j + 1 + " " + sellItems.get(j).getName());
+				}
 			}
 		}
 		admin_view.cp.setPreferredSize(new Dimension(300, 400));
