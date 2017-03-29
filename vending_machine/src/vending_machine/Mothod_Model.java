@@ -24,6 +24,8 @@ public class Mothod_Model {
 	int startIdx, endIdx;
 
 	Vector<String[]> str_V;
+	Vector<String[]> allSellMoney;
+
 	Vector<Vegitable> framItems;// 총 아이템의 정보
 	Vector<Vegitable> sellItems;// 판매할 아이템의 정보들
 
@@ -75,14 +77,15 @@ public class Mothod_Model {
 	}
 
 	public void currentSellItems(Vector<Vegitable> sellItems) {
-		
+
 		try {
-			
+
 			BufferedWriter br = new BufferedWriter(new FileWriter("nowItem.txt"));
-			
+
 			for (int j = 0; j < sellItems.size(); j++) {
 				Vegitable p = sellItems.get(j);
-				String str = p.getName()+","+p.getPrice()+","+p.getRemains()+","+p.getFarmer()+p.getPath()+"\n";
+				String str = p.getName() + "," + p.getPrice() + "," + p.getRemains() + "," + p.getFarmer() + p.getPath()
+						+ "\n";
 				br.write(str);
 				System.out.println(str);
 			}
@@ -113,31 +116,75 @@ public class Mothod_Model {
 			}
 		}
 	}
-	public void divisionFile(){
+
+	private void divisionFile() {// 걍 전부 읽어 오자 아... 머리가 나쁜가 보네 망했다
 		File file = new File("selldata.txt");
-		String month=null;
-		String readStr=null;
-		int moneyMonth=0;
+
+		BufferedWriter out = null;
+		BufferedWriter out2 = null;
+
+		allSellMoney = new Vector<>();
+		String readStr = null;
+		int MonthsM = 0;// 다달 매출액
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
-
-			while (  (readStr=br.readLine()) != null) {
-				
-				String strArr[]=readStr.split(",");
-				
-				if(month==strArr[1]){//개월 1~31
-					
-				}
+			while ((readStr = br.readLine()) != null) {
+				String strArr[] = readStr.split(",");
+				allSellMoney.add(strArr);
 			}
-			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// 나누기
+		try {
+			for (int i = 0; i < allSellMoney.size() - 1; i++) {
+				for (int j = i + 1; j < allSellMoney.size(); j++) {
+
+					System.out.println(allSellMoney.get(i)[1] + "\t" + allSellMoney.get(j)[1]);
+
+					System.out.println(allSellMoney.get(allSellMoney.size() - 1)[1]+"######"+allSellMoney.get(j)[1]);
+					if (allSellMoney.get(allSellMoney.size() - 1)[1].equals(allSellMoney.get(j)[1])) {
+						// 마지막 달
+						String str = allSellMoney.get(i)[0] + "," + allSellMoney.get(i)[1] + ","
+								+ allSellMoney.get(i)[2] + "," + allSellMoney.get(i)[3];
+						out = new BufferedWriter(new FileWriter("month.txt"));// 1~30
+						out.write(str + "\n");
+
+					}
+					
+					if (allSellMoney.get(i)[1].equals(allSellMoney.get(j)[1])) {
+
+						MonthsM += Integer.parseInt(allSellMoney.get(j)[3]);
+						// else 3==4
+						
+
+					} else {
+						System.out.println("==========");
+						String str = allSellMoney.get(i)[0] + "," + allSellMoney.get(i)[1] + ","
+								+ allSellMoney.get(i)[2];
+						i = j;
+						out2 = new BufferedWriter(new FileWriter("months.txt"));// 다달
+						out2.write(str + "," + String.valueOf(MonthsM) + "\n");
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				out2.close();//months
+				out.close();
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+		}
+
 	}
+
 	// 매출액.....차트용
 	public DefaultCategoryDataset getDataSet(int selectFile) {
-
+		divisionFile();
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		str_V = new Vector<>();
 		// 데이터 입력 ( 값, 범례, 카테고리 )정수실수,String,String
@@ -157,7 +204,7 @@ public class Mothod_Model {
 			startIdx = 8;
 			endIdx = 10;
 			break;
-		case 3:// Current 
+		case 3:// Current
 			strFilePath = "month.txt";
 			str[0] = "최근 일주일";
 			str[1] = "일";
@@ -171,12 +218,12 @@ public class Mothod_Model {
 		try {
 			File file = new File(strFilePath);// 파일 정보 가져오고
 			BufferedReader br = new BufferedReader(new FileReader(file));
-			
-			String readStr=null;
+
+			String readStr = null;
 
 			if (selectFile == 3) {
-				while (  (readStr=br.readLine()) != null) {
-					String strArr[]=readStr.split(",");
+				while ((readStr = br.readLine()) != null) {
+					String strArr[] = readStr.split(",");
 					str_V.add(strArr);
 				}
 
@@ -184,12 +231,12 @@ public class Mothod_Model {
 					int 매출량 = Integer.parseInt(str_V.get(i)[3]);
 					dataset.addValue(매출량, str[0], str_V.get(i)[2] + str[1]);
 				}
-			
-			} else {
-				while (  (readStr=br.readLine()) != null) {
 
-					String strArr[]=readStr.split(",");
-					dataset.addValue(Integer.parseInt(strArr[3]), str[0],strArr[2] + str[1]);
+			} else {
+				while ((readStr = br.readLine()) != null) {
+
+					String strArr[] = readStr.split(",");
+					dataset.addValue(Integer.parseInt(strArr[3]), str[0], strArr[2] + str[1]);
 				}
 			}
 			br.close();
