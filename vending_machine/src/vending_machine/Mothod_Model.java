@@ -23,7 +23,7 @@ public class Mothod_Model {
 	String strFilePath, str[] = new String[2];
 	int startIdx, endIdx;
 
-	Vector<Revenue_Year> v;
+	Vector<String[]> str_V;
 	Vector<Vegitable> framItems;// 총 아이템의 정보
 	Vector<Vegitable> sellItems;// 판매할 아이템의 정보들
 
@@ -75,18 +75,18 @@ public class Mothod_Model {
 	}
 
 	public void currentSellItems(Vector<Vegitable> sellItems) {
-		FileOutputStream fos;
+		
 		try {
 			
-			fos = new FileOutputStream("nowItem.ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			BufferedWriter br = new BufferedWriter(new FileWriter("nowItem.txt"));
 			
 			for (int j = 0; j < sellItems.size(); j++) {
 				Vegitable p = sellItems.get(j);
-				oos.writeObject(p);		
-				System.out.println(j);
+				String str = p.getName()+","+p.getPrice()+","+p.getRemains()+","+p.getFarmer()+p.getPath()+"\n";
+				br.write(str);
+				System.out.println(str);
 			}
-			oos.close();
+			br.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,31 +113,52 @@ public class Mothod_Model {
 			}
 		}
 	}
+	public void divisionFile(){
+		File file = new File("selldata.txt");
+		String month=null;
+		String readStr=null;
+		int moneyMonth=0;
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(file));
 
+			while (  (readStr=br.readLine()) != null) {
+				
+				String strArr[]=readStr.split(",");
+				
+				if(month==strArr[1]){//개월 1~31
+					
+				}
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	// 매출액.....차트용
 	public DefaultCategoryDataset getDataSet(int selectFile) {
 
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		v = new Vector<>();
+		str_V = new Vector<>();
 		// 데이터 입력 ( 값, 범례, 카테고리 )정수실수,String,String
 		// 그래프 ,.... 여기다 파일을 입력하면...
 		switch (selectFile) {
 		case 1:// year
-			strFilePath = "a.ser";
+			strFilePath = "months.txt";
 			str[0] = "월별";
 			str[1] = "월";
 			startIdx = 5;
 			endIdx = 7;
 			break;
 		case 2:// year
-			strFilePath = "month.ser";
+			strFilePath = "month.txt";
 			str[0] = "한달";
 			str[1] = "일";
 			startIdx = 8;
 			endIdx = 10;
 			break;
-		case 3:// year
-			strFilePath = "month.ser";
+		case 3:// Current 
+			strFilePath = "month.txt";
 			str[0] = "최근 일주일";
 			str[1] = "일";
 			startIdx = 8;
@@ -149,34 +170,29 @@ public class Mothod_Model {
 
 		try {
 			File file = new File(strFilePath);// 파일 정보 가져오고
-			fis = new FileInputStream(file);
-
-			ObjectInputStream ois = new ObjectInputStream(fis);// 오브젝트 형태로 가져온다
-			int count = 0;
-			System.out.println(ois.available());
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			
+			String readStr=null;
 
 			if (selectFile == 3) {
-				while ((count = fis.available()) > 0) {
-					Revenue_Year p_read = (Revenue_Year) ois.readObject();
-					v.add(p_read);
+				while (  (readStr=br.readLine()) != null) {
+					String strArr[]=readStr.split(",");
+					str_V.add(strArr);
 				}
 
-				for (int i = v.size() - 7; i < v.size(); i++) {
-					dataset.addValue(v.get(i).getRevenue(), str[0],
-							v.get(i).getCalendar().substring(startIdx, endIdx) + str[1]);
+				for (int i = str_V.size() - 7; i < str_V.size(); i++) {
+					int 매출량 = Integer.parseInt(str_V.get(i)[3]);
+					dataset.addValue(매출량, str[0], str_V.get(i)[2] + str[1]);
 				}
-
+			
 			} else {
-				while ((count = fis.available()) > 0) {
-					Revenue_Year p_read = (Revenue_Year) ois.readObject();
-					dataset.addValue(p_read.getRevenue(), str[0],
-							p_read.getCalendar().substring(startIdx, endIdx) + str[1]);
+				while (  (readStr=br.readLine()) != null) {
+
+					String strArr[]=readStr.split(",");
+					dataset.addValue(Integer.parseInt(strArr[3]), str[0],strArr[2] + str[1]);
 				}
 			}
-
-			fis.close();
-			ois.close();
-
+			br.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.err.println("!!");

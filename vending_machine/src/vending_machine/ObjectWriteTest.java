@@ -27,6 +27,7 @@ public class ObjectWriteTest {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			
 			for (int i = 0; i < 16; i++) {
+				System.out.println("==");
 				from.setDate(i);
 				String strCal = transFormat.format(from);
 				
@@ -42,15 +43,19 @@ public class ObjectWriteTest {
 				System.out.print("생산자 :");
 				String pro = br.readLine();
 				
+				System.out.print("이미지 경로 :");
+				String path = br.readLine();
 				
-				Vegitable p = new Vegitable(name,price,remains,pro);
+				String name = br.readLine();
+				String asd[] = name.split(",");
+				Vegitable p = new Vegitable(asd[0],Integer.parseInt(asd[1]),Integer.parseInt(asd[2]),asd[3],asd[4]);
 				oos.writeObject(p);
 			}
 
 			oos.close();
 			System.out.println("객체쓰기 성공");*/
 			// ==========================================
-			File file = new File("nowItem.ser");// 파일 정보 가져오고
+			File file = new File("framItems.ser");// 파일 정보 가져오고
 			FileInputStream fis = new FileInputStream(file);// 파일에 있는 정보를 가져오고
 			ObjectInputStream ois = new ObjectInputStream(fis);// 오브젝트 형태로 가져온다
 
@@ -63,7 +68,7 @@ public class ObjectWriteTest {
 				Vegitable p_read = (Vegitable) ois.readObject();
 				System.out.println("\t\t\t\t"+"현재 값이 : "+p_read);
 				if(p_read != null){
-				System.out.println("채소이름 :"+p_read.getName()+" 가격 : "+p_read.getPrice()+" 재고량 : "+p_read.getRemains()+" 생산자 : "+p_read.getFarmer());			
+				System.out.println("채소이름 :"+p_read.getName()+" 가격 : "+p_read.getPrice()+" 재고량 : "+p_read.getRemains()+" 생산자 : "+p_read.getFarmer()+" 이미지 경로 :"+p_read.getPath());			
 				}
 //				System.out.println("주 : " + p_read.getCalendar());
 //				System.out.println("매출액 : " + p_read.getRevenue());// 매출액
