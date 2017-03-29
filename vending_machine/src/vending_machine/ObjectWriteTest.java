@@ -17,7 +17,7 @@ public class ObjectWriteTest {
 
 	public static void main(String[] args) {
 		try {
-/*			FileOutputStream fos = new FileOutputStream("framItems.ser");
+			/*FileOutputStream fos = new FileOutputStream("framItems.ser");
 
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
