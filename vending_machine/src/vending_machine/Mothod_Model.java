@@ -42,7 +42,7 @@ public class Mothod_Model {
 				Vegitable p_read = (Vegitable) ois.readObject();
 				framItems.add(p_read);
 				System.out.println("채소이름 :" + p_read.getName() + " 가격 : " + p_read.getPrice() + "재고량 : "
-						+ p_read.getRemains() + " 생산자 : " + p_read.farmer);
+						+ p_read.getRemains() + " 생산자 : " + p_read.getFarmer());
 			}
 
 			fis.close();
@@ -82,10 +82,11 @@ public class Mothod_Model {
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			
 			for (int j = 0; j < sellItems.size(); j++) {
-				oos.writeObject(sellItems.get(j));				
+				Vegitable p = sellItems.get(j);
+				oos.writeObject(p);		
+				System.out.println(j);
 			}
 			oos.close();
-			System.out.println("설마");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,10 +3,10 @@ package vending_machine;
 import java.io.Serializable;
 
 public class Vegitable implements Serializable{
-	String name;
-	int price;
-	int remains;	//재고량
-	String farmer;// 생산자
+	private String name;
+	private int price;
+	private int remains;	//재고량
+	private String farmer;// 생산자
 	
 	public Vegitable(String name, int price, int remains, String farmer) {
 		super();

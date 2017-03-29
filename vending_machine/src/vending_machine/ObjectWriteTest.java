@@ -17,7 +17,7 @@ public class ObjectWriteTest {
 
 	public static void main(String[] args) {
 		try {
-			FileOutputStream fos = new FileOutputStream("framItems.ser");
+/*			FileOutputStream fos = new FileOutputStream("framItems.ser");
 
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -48,9 +48,9 @@ public class ObjectWriteTest {
 			}
 
 			oos.close();
-			System.out.println("객체쓰기 성공");
+			System.out.println("객체쓰기 성공");*/
 			// ==========================================
-			File file = new File("framItems.ser");// 파일 정보 가져오고
+			File file = new File("nowItem.ser");// 파일 정보 가져오고
 			FileInputStream fis = new FileInputStream(file);// 파일에 있는 정보를 가져오고
 			ObjectInputStream ois = new ObjectInputStream(fis);// 오브젝트 형태로 가져온다
 
@@ -58,9 +58,13 @@ public class ObjectWriteTest {
 			System.out.println(ois.available());
 			while ((count = fis.available()) > 0) {
 				System.out.println("\t\tcount : " + count);
-				Vegitable p_read = (Vegitable) ois.readObject();
 				
-				System.out.println("채소이름 :"+p_read.getName()+" 가격 : "+p_read.getPrice()+" 재고량 : "+p_read.getRemains()+" 생산자 : "+p_read.farmer);				
+				
+				Vegitable p_read = (Vegitable) ois.readObject();
+				System.out.println("\t\t\t\t"+"현재 값이 : "+p_read);
+				if(p_read != null){
+				System.out.println("채소이름 :"+p_read.getName()+" 가격 : "+p_read.getPrice()+" 재고량 : "+p_read.getRemains()+" 생산자 : "+p_read.getFarmer());			
+				}
 //				System.out.println("주 : " + p_read.getCalendar());
 //				System.out.println("매출액 : " + p_read.getRevenue());// 매출액
 			}
