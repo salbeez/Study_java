@@ -1,20 +1,14 @@
 package vending_machine;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Vector;
-
-import javax.xml.ws.FaultAction;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -28,6 +22,10 @@ public class Mothod_Model {
 
 	Vector<Vegitable> framItems;// 총 아이템의 정보
 	Vector<Vegitable> sellItems;// 판매할 아이템의 정보들
+
+	public Mothod_Model() {
+		divisionFile();
+	}
 
 	public Vector<Vegitable> readFarmItems() {
 		framItems = new Vector<>();
@@ -59,7 +57,6 @@ public class Mothod_Model {
 
 	public String[] exchangeRead() {
 		File file = new File("exchange.txt");// 파일 정보 가져오고
-		FileInputStream fis;
 		String str = null;
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(file));
@@ -120,6 +117,7 @@ public class Mothod_Model {
 	private void divisionFile() {// 걍 전부 읽어 오자 아... 머리가 나쁜가 보네 망했다
 		File file = new File("selldata.txt");
 
+		BufferedReader br = null;
 		BufferedWriter out = null;
 		BufferedWriter out2 = null;
 
@@ -127,52 +125,57 @@ public class Mothod_Model {
 		String readStr = null;
 		int MonthsM = 0;// 다달 매출액
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(file));
-			while ((readStr = br.readLine()) != null) {
+			br = new BufferedReader(new FileReader(file));
+			out = new BufferedWriter(new FileWriter("month.txt"));// 1~30
+			out2 = new BufferedWriter(new FileWriter("months.txt"));// 다달
+
+			while ((readStr = br.readLine()) != null) {// 전부 배열에 넣고
 				String strArr[] = readStr.split(",");
 				allSellMoney.add(strArr);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		// 나누기
-		try {
-			for (int i = 0; i < allSellMoney.size() - 1; i++) {
+
+			// 나누기
+			for (int i = 0; i < 12; i++) {// 1년은 12달
 				for (int j = i + 1; j < allSellMoney.size(); j++) {
 
 					System.out.println(allSellMoney.get(i)[1] + "\t" + allSellMoney.get(j)[1]);
 
-					System.out.println(allSellMoney.get(allSellMoney.size() - 1)[1]+"######"+allSellMoney.get(j)[1]);
-					if (allSellMoney.get(allSellMoney.size() - 1)[1].equals(allSellMoney.get(j)[1])) {
-						// 마지막 달
-						String str = allSellMoney.get(i)[0] + "," + allSellMoney.get(i)[1] + ","
-								+ allSellMoney.get(i)[2] + "," + allSellMoney.get(i)[3];
-						out = new BufferedWriter(new FileWriter("month.txt"));// 1~30
-						out.write(str + "\n");
-
-					}
-					
 					if (allSellMoney.get(i)[1].equals(allSellMoney.get(j)[1])) {
 
 						MonthsM += Integer.parseInt(allSellMoney.get(j)[3]);
+						System.out.println(MonthsM + "\t\t" + allSellMoney.get(j)[0] + allSellMoney.get(j)[1]
+								+ allSellMoney.get(j)[2]);
 						// else 3==4
-						
 
 					} else {
 						System.out.println("==========");
+
 						String str = allSellMoney.get(i)[0] + "," + allSellMoney.get(i)[1] + ","
 								+ allSellMoney.get(i)[2];
+						System.out.println("\t\t\t\t" + i + "\t" + j);
 						i = j;
-						out2 = new BufferedWriter(new FileWriter("months.txt"));// 다달
 						out2.write(str + "," + String.valueOf(MonthsM) + "\n");
+						MonthsM = 0;
 					}
+
+					System.out
+							.println(allSellMoney.get(allSellMoney.size() - 1)[1] + "######" + allSellMoney.get(j)[1]);
+					if (allSellMoney.get(allSellMoney.size() - 1)[1].equals(allSellMoney.get(j)[1])) {
+						// 마지막 달
+						System.out.println("마지막 달");
+						String str = allSellMoney.get(j)[0] + "," + allSellMoney.get(j)[1] + ","
+								+ allSellMoney.get(j)[2] + "," + allSellMoney.get(j)[3];
+						System.out.println(str);
+						out.write(str + "\n");
+					} // 마지막 달
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				out2.close();//months
+				br.close();
+				out2.close();// months
 				out.close();
 			} catch (IOException e) {
 
@@ -184,27 +187,26 @@ public class Mothod_Model {
 
 	// 매출액.....차트용
 	public DefaultCategoryDataset getDataSet(int selectFile) {
-		divisionFile();
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		str_V = new Vector<>();
 		// 데이터 입력 ( 값, 범례, 카테고리 )정수실수,String,String
 		// 그래프 ,.... 여기다 파일을 입력하면...
 		switch (selectFile) {
-		case 1:// year
+		case 1:// 다달
 			strFilePath = "months.txt";
 			str[0] = "월별";
 			str[1] = "월";
 			startIdx = 5;
 			endIdx = 7;
 			break;
-		case 2:// year
+		case 2:// 한달동안
 			strFilePath = "month.txt";
 			str[0] = "한달";
 			str[1] = "일";
 			startIdx = 8;
 			endIdx = 10;
 			break;
-		case 3:// Current
+		case 3:// 최근 일주일
 			strFilePath = "month.txt";
 			str[0] = "최근 일주일";
 			str[1] = "일";
@@ -220,29 +222,34 @@ public class Mothod_Model {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 
 			String readStr = null;
-
+			String fuck = null;//일,월
 			if (selectFile == 3) {
 				while ((readStr = br.readLine()) != null) {
 					String strArr[] = readStr.split(",");
 					str_V.add(strArr);
 				}
-
-				for (int i = str_V.size() - 7; i < str_V.size(); i++) {
-					int 매출량 = Integer.parseInt(str_V.get(i)[3]);
-					dataset.addValue(매출량, str[0], str_V.get(i)[2] + str[1]);
+				int startIdx = 0;
+				if ((str_V.size() - 7) > 0) {
+					startIdx = str_V.size() - 7;
+				}
+				for (int i = startIdx; i < str_V.size(); i++) {
+					int revenue = Integer.parseInt(str_V.get(i)[3]);
+					dataset.addValue(revenue, str[0], str_V.get(i)[2] + str[1]);
 				}
 
 			} else {
 				while ((readStr = br.readLine()) != null) {
-
 					String strArr[] = readStr.split(",");
-					dataset.addValue(Integer.parseInt(strArr[3]), str[0], strArr[2] + str[1]);
+					if(selectFile == 2){
+						fuck = strArr[2];
+					}else{
+						fuck = strArr[1];
+					}
+					dataset.addValue(Integer.parseInt(strArr[3]), str[0], fuck + str[1]);												
 				}
 			}
 			br.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.err.println("!!");
 			e.printStackTrace();
 		} // 파일에 있는 정보를 가져오고
 

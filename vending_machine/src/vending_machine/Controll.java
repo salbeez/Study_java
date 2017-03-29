@@ -1,7 +1,6 @@
 package vending_machine;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -10,9 +9,6 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.ChartPanel;
-import org.jfree.data.category.DefaultCategoryDataset;
 
 //<컨트롤러의 역할> : 프로그램 전체적인 흐름제어
 //1. 사용자의 요청(요구) 사항 분석 [버튼 1을 클릭했는지 , 버튼2를 클릭했는지 ...]  obj==bt or bt2
