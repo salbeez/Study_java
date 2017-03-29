@@ -123,7 +123,6 @@ public class Controll implements ActionListener {
 			admin_view.setVisible(false);
 			farm_view.setVisible(true);
 			index = 4;
-			System.out.println("****");
 		} else if (obj == admin_view.bt_vet[5]) {
 			admin_view.setVisible(false);
 			farm_view.setVisible(true);
@@ -146,7 +145,10 @@ public class Controll implements ActionListener {
 			
 			model.exchangeWirte(money);
 			// exchange.txt
-		} else {// 나머지 16개의 버튼
+		} else if(obj == admin_view.bt_re){
+			//현재의 판매 아이템을 nowItem.ser에 넣는다
+			model.currentSellItems(sellItems);
+		}else {// 나머지 16개의 버튼
 			JButton bt = (JButton) obj;
 			int i = Integer.parseInt(bt.getLabel()) - 1;//
 			sellItems.set(index, farmItems.get(i));

@@ -2,12 +2,19 @@ package vending_machine;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Vector;
+
+import javax.xml.ws.FaultAction;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -18,6 +25,7 @@ public class Mothod_Model {
 
 	Vector<Revenue_Year> v;
 	Vector<Vegitable> framItems;// 총 아이템의 정보
+	Vector<Vegitable> sellItems;// 판매할 아이템의 정보들
 
 	public Vector<Vegitable> readFarmItems() {
 		framItems = new Vector<>();
@@ -33,8 +41,8 @@ public class Mothod_Model {
 				System.out.println("\t\tcount : " + count);
 				Vegitable p_read = (Vegitable) ois.readObject();
 				framItems.add(p_read);
-				System.out.println(
-						"채소이름 :" + p_read.getName() + " 가격 : " + p_read.getPrice() + " 생산자 : " + p_read.farmer);
+				System.out.println("채소이름 :" + p_read.getName() + " 가격 : " + p_read.getPrice() + "재고량 : "
+						+ p_read.getRemains() + " 생산자 : " + p_read.farmer);
 			}
 
 			fis.close();
@@ -51,17 +59,59 @@ public class Mothod_Model {
 		File file = new File("exchange.txt");// 파일 정보 가져오고
 		FileInputStream fis;
 		String str = null;
-
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			str = in.readLine();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		if (str == null) {// 만약 아무것도 안쓰여져 있다면
+			String s[] = { "0", "0", "0", "0" };
+			return s;
+		}
 		String strArr[] = str.split(",");
+
 		return strArr;
 	}
-	public void exchangeWirte(String money[]){}
+
+	public void currentSellItems(Vector<Vegitable> sellItems) {
+		FileOutputStream fos;
+		try {
+			
+			fos = new FileOutputStream("nowItem.ser");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			for (int j = 0; j < sellItems.size(); j++) {
+				oos.writeObject(sellItems.get(j));				
+			}
+			oos.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void exchangeWirte(String money[]) {// [0]천원,오천원,만원,오만원
+		File file = new File("exchange.txt");// 쓸 파일 가져오고
+		BufferedWriter out = null;
+		try {
+			out = new BufferedWriter(new FileWriter(file));
+
+			String str = money[0] + "," + money[1] + "," + money[2] + "," + money[3];
+			out.write(str);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 	// 매출액.....차트용
 	public DefaultCategoryDataset getDataSet(int selectFile) {
 
