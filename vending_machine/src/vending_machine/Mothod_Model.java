@@ -85,6 +85,7 @@ public class Mothod_Model {
 				oos.writeObject(sellItems.get(j));				
 			}
 			oos.close();
+			System.out.println("¼³¸¶");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -74,7 +74,8 @@ public class Controll implements ActionListener {
 		admin_view.bt_weak.addActionListener(this);
 		admin_view.bt_year.addActionListener(this);
 		admin_view.bt_summit.addActionListener(this);
-
+		admin_view.bt_re.addActionListener(this);
+		
 		for (int i = 0; i < farm_view.bt.length; i++) {
 			farm_view.bt[i].addActionListener(this);
 		}
