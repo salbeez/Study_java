@@ -74,22 +74,35 @@ public class Mothod_Model {
 	}
 
 	public void currentSellItems(Vector<Vegitable> sellItems) {
-
+		BufferedWriter br = null;
+		String str = null;
 		try {
 
-			BufferedWriter br = new BufferedWriter(new FileWriter("nowItem.txt"));
+			br = new BufferedWriter(new FileWriter("nowItem.txt"));
 
 			for (int j = 0; j < sellItems.size(); j++) {
 				Vegitable p = sellItems.get(j);
-				String str = p.getName() + "," + p.getPrice() + "," + p.getRemains() + "," + p.getFarmer() + p.getPath()
-						+ "\n";
-				br.write(str);
+				if (p != null) {
+					str = p.getName() + "," + p.getPrice() + "," + p.getRemains() + "," + p.getFarmer() + ","
+							+ p.getPath() + "\n";
+					br.write(str);
+				} else {
+					str = "0,0,0,0,0\n";
+					br.write(str);
+				}
 				System.out.println(str);
 			}
-			br.close();
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -222,7 +235,7 @@ public class Mothod_Model {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 
 			String readStr = null;
-			String fuck = null;//일,월
+			String fuck = null;// 일,월
 			if (selectFile == 3) {
 				while ((readStr = br.readLine()) != null) {
 					String strArr[] = readStr.split(",");
@@ -240,12 +253,12 @@ public class Mothod_Model {
 			} else {
 				while ((readStr = br.readLine()) != null) {
 					String strArr[] = readStr.split(",");
-					if(selectFile == 2){
+					if (selectFile == 2) {
 						fuck = strArr[2];
-					}else{
+					} else {
 						fuck = strArr[1];
 					}
-					dataset.addValue(Integer.parseInt(strArr[3]), str[0], fuck + str[1]);												
+					dataset.addValue(Integer.parseInt(strArr[3]), str[0], fuck + str[1]);
 				}
 			}
 			br.close();
