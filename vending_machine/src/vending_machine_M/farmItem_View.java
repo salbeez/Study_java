@@ -1,4 +1,4 @@
-package vending_machine;
+package vending_machine_M;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

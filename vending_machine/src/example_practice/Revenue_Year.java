@@ -1,4 +1,4 @@
-package vending_machine;
+package example_practice;
 
 import java.io.Serializable;
 import java.util.Calendar;

@@ -1,4 +1,4 @@
-package vending_machine;
+package vending_machine_M;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +12,11 @@ import java.util.Vector;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
-public class Mothod_Model {
+import vending_machine_V.Vegitable;
+
+public class Method_Model_Admin {
+	private static final long serialVersionUID = 1L;
+
 	FileInputStream fis;
 	String strFilePath, str[] = new String[2];
 	int startIdx, endIdx;
@@ -23,7 +27,7 @@ public class Mothod_Model {
 	Vector<Vegitable> framItems;// 총 아이템의 정보
 	Vector<Vegitable> sellItems;// 판매할 아이템의 정보들
 
-	public Mothod_Model() {
+	public Method_Model_Admin() {
 		divisionFile();
 	}
 

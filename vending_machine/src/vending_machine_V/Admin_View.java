@@ -1,4 +1,4 @@
-package vending_machine;
+package vending_machine_V;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;

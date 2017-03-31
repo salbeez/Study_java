@@ -1,4 +1,4 @@
-package vending_machine;
+package vending_machine_C;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -8,6 +8,11 @@ import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 import javax.swing.JButton;
+
+import vending_machine_M.Method_Model_Admin;
+import vending_machine_M.farmItem_View;
+import vending_machine_V.Admin_View;
+import vending_machine_V.Vegitable;
 
 
 //<컨트롤러의 역할> : 프로그램 전체적인 흐름제어
@@ -19,18 +24,18 @@ import javax.swing.JButton;
 //4. 이동할 페이지(Frame)를 선택(페이지 이동 제어)
 //5. 유효성 검사[추가 옵션] ex) 사용자가 입력한 데이터가 올바른 값인지 뷰단에서도 할수 있음
 //6. 인증 or 보안
-public class Controll implements ActionListener {
+public class Controll_Admin implements ActionListener {
 
 	Admin_View admin_view;
 	farmItem_View farm_view;
-	Mothod_Model model;
+	Method_Model_Admin model;
 
 	Vector<Vegitable> farmItems;// 총 아이템의 정보
 	Vector<Vegitable> sellItems;// 판매할 아이템의 정보
 
 	int index;
 
-	public Controll() {
+	public Controll_Admin() {
 		init();
 		setting();
 		eventUp();
@@ -39,7 +44,7 @@ public class Controll implements ActionListener {
 	private void init() {
 		admin_view = new Admin_View();
 		farm_view = new farmItem_View();
-		model = new Mothod_Model();
+		model = new Method_Model_Admin();
 
 		sellItems = new Vector<>(8);
 	}
@@ -145,6 +150,7 @@ public class Controll implements ActionListener {
 		} else if(obj == admin_view.bt_re){
 			//현재의 판매 아이템을 nowItem.ser에 넣는다
 			model.currentSellItems(sellItems);
+			System.out.println("어드민 쪽");
 		}else {// 나머지 16개의 버튼
 			JButton bt = (JButton) obj;
 			int i = Integer.parseInt(bt.getLabel()) - 1;//
@@ -164,8 +170,8 @@ public class Controll implements ActionListener {
 		admin_view.cp.setChart(admin_view.chart);
 	}
 
-	public static void main(String[] args) {
-		new Controll();
-	}
+//	public static void main(String[] args) {
+//		new Controll();
+//	}
 
 }

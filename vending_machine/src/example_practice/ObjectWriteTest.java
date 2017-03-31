@@ -1,4 +1,4 @@
-package vending_machine;
+package example_practice;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,11 +13,13 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.SynchronousQueue;
 
+import vending_machine_V.Vegitable;
+
 public class ObjectWriteTest {
 
 	public static void main(String[] args) {
 		try {
-			/*FileOutputStream fos = new FileOutputStream("framItems.ser");
+			FileOutputStream fos = new FileOutputStream("framItems.ser");
 
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -27,7 +29,7 @@ public class ObjectWriteTest {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			
 			for (int i = 0; i < 16; i++) {
-				System.out.println("==");
+				/*System.out.println("==");
 				from.setDate(i);
 				String strCal = transFormat.format(from);
 				
@@ -44,7 +46,7 @@ public class ObjectWriteTest {
 				String pro = br.readLine();
 				
 				System.out.print("이미지 경로 :");
-				String path = br.readLine();
+				String path = br.readLine();*/
 				
 				String name = br.readLine();
 				String asd[] = name.split(",");
@@ -53,7 +55,7 @@ public class ObjectWriteTest {
 			}
 
 			oos.close();
-			System.out.println("객체쓰기 성공");*/
+			System.out.println("객체쓰기 성공");
 			// ==========================================
 			File file = new File("framItems.ser");// 파일 정보 가져오고
 			FileInputStream fis = new FileInputStream(file);// 파일에 있는 정보를 가져오고

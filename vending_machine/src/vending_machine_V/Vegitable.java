@@ -1,8 +1,13 @@
-package vending_machine;
+package vending_machine_V;
 
 import java.io.Serializable;
 
 public class Vegitable implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;//  아이디를 정해주고 오브젝트를 읽을 곳에서도 아이디가 일치 
+																		//즉, 복붙
 	private String name;
 	private int price;
 	private int remains;	//재고량
