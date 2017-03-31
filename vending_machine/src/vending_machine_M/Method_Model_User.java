@@ -19,7 +19,7 @@ public class Method_Model_User implements Runnable {
 	Vector<Vegitable> curr_vegit_V;
 	Vegitable item;
 	Calendar currentCal;
-
+	private String revenuMoney;
 	public Method_Model_User() {
 		curr_vegit_V = new Vector<>();
 		readCurrntItem();
@@ -28,7 +28,11 @@ public class Method_Model_User implements Runnable {
 		a.start();
 		wirteSellData();
 	}
-
+	public void revenue(int money){//컨트롤러에서 매출액 발생시 호출 
+		//즉 농산물 판돈액수가 매출액이다 (순이익은 원가 제외한 값)
+		String temp = String.valueOf(money);
+		revenuMoney = temp;
+	}
 	public Vector<Vegitable> readCurrntItem() {
 
 		File file = new File("nowItem.txt");
@@ -67,10 +71,10 @@ public class Method_Model_User implements Runnable {
 
 	public void wirteSellData() {
 		try {
-			BufferedWriter wirteFile = new BufferedWriter(new FileWriter("selldata2.txt", true));
+			BufferedWriter wirteFile = new BufferedWriter(new FileWriter("selldata2.txt", true));//이어쓰기 가능
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy,MM,dd");
 			Date d = new Date(currentCal.getTimeInMillis());// Calendar를 Date형식으로
-			String to = transFormat.format(d)+"매출액\n";
+			String to = transFormat.format(d)+","+revenuMoney+"\n";
 			System.out.println(to);
 			wirteFile.write(to);
 			wirteFile.close();
@@ -93,7 +97,7 @@ public class Method_Model_User implements Runnable {
 			System.out.println(currentCal.get(Calendar.YEAR) + " " + currentCal.get(Calendar.MONTH) + " "
 					+ currentCal.get(Calendar.DAY_OF_MONTH) + " " + currentCal.get(Calendar.HOUR_OF_DAY) + " "
 					+ currentCal.get(Calendar.MINUTE) + " " + currentCal.get(Calendar.SECOND));
-			if (currentCal.get(Calendar.HOUR) == 0 && currentCal.get(Calendar.MINUTE) == 0
+			if (currentCal.get(Calendar.YEAR) == 2017 && currentCal.get(Calendar.HOUR) == 0 && currentCal.get(Calendar.MINUTE) == 0
 					&& currentCal.get(Calendar.MILLISECOND) == 0) {
 				// 오전12시=24시:00분 00초
 				wirteSellData();//
