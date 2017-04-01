@@ -227,8 +227,7 @@ public class UserController implements ActionListener, Runnable {
 					System.out.println("오늘 매출액 저장");
 					//매출액의 초기화
 					user_model.todayRevenue=0;
-					File f = new File("todayRevenue.txt");
-					f.delete();//파일삭제
+					user_model.write_TodayRevenue(100);
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {

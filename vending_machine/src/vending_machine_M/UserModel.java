@@ -129,7 +129,11 @@ public class UserModel {
 		String str = null;
 		try {
 			bw = new BufferedWriter(new FileWriter("todayRevenue.txt"));
-			str = current_item_V.get(idx).getPrice() +todayRevenue+ "";
+			if(idx==100){
+				str = "0";
+			}else{
+				str = current_item_V.get(idx).getPrice() +todayRevenue+ "";								
+			}
 			bw.write(str);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -158,5 +162,4 @@ public class UserModel {
 		return todayRevenue;
 		
 	}
-
 }

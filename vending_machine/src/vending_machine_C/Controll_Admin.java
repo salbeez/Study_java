@@ -14,7 +14,6 @@ import vending_machine_V.Admin_View;
 import vending_machine_V.Vegitable;
 import vending_machine_V.farmItem_View;
 
-
 //<컨트롤러의 역할> : 프로그램 전체적인 흐름제어
 //1. 사용자의 요청(요구) 사항 분석 [버튼 1을 클릭했는지 , 버튼2를 클릭했는지 ...]  obj==bt or bt2
 //2. 사용자의 입력한 데이터를 얻어오는거 [] 판단.... 여기에 choice를 놔도 될듯...
@@ -61,13 +60,13 @@ public class Controll_Admin implements ActionListener {
 		admin_view.tf_five.setText(arrayStr[1]);
 		admin_view.tf_ten.setText(arrayStr[2]);
 		admin_view.tf_fifty.setText(arrayStr[3]);
-		
-		int total=0;
-		total += (Integer.parseInt(arrayStr[0]) * 1000); 
-		total += (Integer.parseInt(arrayStr[1]) * 5000); 
-		total += (Integer.parseInt(arrayStr[2]) * 10000); 
-		total += (Integer.parseInt(arrayStr[3]) * 50000); 
-		admin_view.tf_sum.setText(""+total);
+
+		int total = 0;
+		total += (Integer.parseInt(arrayStr[0]) * 1000);
+		total += (Integer.parseInt(arrayStr[1]) * 5000);
+		total += (Integer.parseInt(arrayStr[2]) * 10000);
+		total += (Integer.parseInt(arrayStr[3]) * 50000);
+		admin_view.tf_sum.setText("" + total);
 	}
 
 	private void eventUp() {
@@ -76,7 +75,7 @@ public class Controll_Admin implements ActionListener {
 		admin_view.bt_year.addActionListener(this);
 		admin_view.bt_summit.addActionListener(this);
 		admin_view.bt_re.addActionListener(this);
-		
+
 		for (int i = 0; i < farm_view.bt.length; i++) {
 			farm_view.bt[i].addActionListener(this);
 		}
@@ -139,19 +138,23 @@ public class Controll_Admin implements ActionListener {
 			index = 7;
 		} else if (obj == admin_view.bt_summit) {
 			System.out.println("전송");
-			String money[]= new String[4];
-			money[0] = admin_view.tf_one.getText();
-			money[1] = admin_view.tf_five.getText();
-			money[2] = admin_view.tf_ten.getText();
-			money[3] = admin_view.tf_fifty.getText();
-			
-			model.exchangeWirte(money);
-			// exchange.txt
-		} else if(obj == admin_view.bt_re){
-/*			//현재의 판매 아이템을 nowItem.ser에 넣는다
-			model.currentSellItems(sellItems);
-			System.out.println("어드민 쪽");*/
-		}else {// 나머지 16개의 버튼
+
+			if ((admin_view.tf_one.getText() + admin_view.tf_five.getText() + admin_view.tf_ten.getText()
+					+ admin_view.tf_fifty.getText()).matches("[0-9]+")) {
+				String money[] = new String[4];
+				money[0] = admin_view.tf_one.getText();
+				money[1] = admin_view.tf_five.getText();
+				money[2] = admin_view.tf_ten.getText();
+				money[3] = admin_view.tf_fifty.getText();
+				// exchange.txt
+				model.exchangeWirte(money);
+			}
+		} else if (obj == admin_view.bt_re) {
+			/*
+			 * //현재의 판매 아이템을 nowItem.ser에 넣는다 model.currentSellItems(sellItems);
+			 * System.out.println("어드민 쪽");
+			 */
+		} else {// 나머지 16개의 버튼
 			JButton bt = (JButton) obj;
 			int i = Integer.parseInt(bt.getLabel()) - 1;//
 			sellItems.set(index, farmItems.get(i));
@@ -169,9 +172,7 @@ public class Controll_Admin implements ActionListener {
 		admin_view.cp.setPreferredSize(new Dimension(300, 400));
 		admin_view.cp.setChart(admin_view.chart);
 	}
-/*
-	public static void main(String[] args) {
-		new Controll_Admin();
-	}
-*/
+	/*
+	 * public static void main(String[] args) { new Controll_Admin(); }
+	 */
 }
