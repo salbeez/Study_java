@@ -29,8 +29,7 @@ public class Manager_Controll implements ActionListener{
 			cont_Admin.admin_view.setVisible(false);
 			
 			//한개의 버튼을 2개의 리스너가 감시시 메인 리스너 먼저 실행후 다 끝나면 그다음 하위 리스너가 실행 
-			cont_Admin.model.currentSellItems(cont_Admin.sellItems);
-			
+			cont_Admin.model.currentSellItems(cont_Admin.sellItems);	
 			cont_User.initialize();
 			cont_User.uv.setVisible(true);
 			
