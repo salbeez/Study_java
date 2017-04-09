@@ -31,7 +31,7 @@ public class Controll_Admin implements ActionListener {
 	Method_Model_Admin model;
 
 	Vector<Vegitable> farmItems;// 총 아이템의 정보
-	Vector<Vegitable> sellItems;// 판매할 아이템의 정보
+	public Vector<Vegitable> sellItems;// 판매할 아이템의 정보
 
 	int index;
 
@@ -148,9 +148,9 @@ public class Controll_Admin implements ActionListener {
 			model.exchangeWirte(money);
 			// exchange.txt
 		} else if(obj == admin_view.bt_re){
-			//현재의 판매 아이템을 nowItem.ser에 넣는다
+/*			//현재의 판매 아이템을 nowItem.ser에 넣는다
 			model.currentSellItems(sellItems);
-			System.out.println("어드민 쪽");
+			System.out.println("어드민 쪽");*/
 		}else {// 나머지 16개의 버튼
 			JButton bt = (JButton) obj;
 			int i = Integer.parseInt(bt.getLabel()) - 1;//
@@ -169,9 +169,9 @@ public class Controll_Admin implements ActionListener {
 		admin_view.cp.setPreferredSize(new Dimension(300, 400));
 		admin_view.cp.setChart(admin_view.chart);
 	}
-
-//	public static void main(String[] args) {
-//		new Controll();
-//	}
-
+/*
+	public static void main(String[] args) {
+		new Controll_Admin();
+	}
+*/
 }

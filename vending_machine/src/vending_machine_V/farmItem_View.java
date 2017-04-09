@@ -42,7 +42,6 @@ public class farmItem_View extends JFrame {
 		for (int i = 0; i < bt.length; i++) {
 			add(bt[i]);
 		}
-		setVisible(false);
 		setSize(300, 300);
 		// setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}

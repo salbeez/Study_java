@@ -87,8 +87,9 @@ public class Method_Model_Admin {
 			for (int j = 0; j < sellItems.size(); j++) {
 				Vegitable p = sellItems.get(j);
 				if (p != null) {
+					
 					str = p.getName() + "," + p.getPrice() + "," + p.getRemains() + "," + p.getFarmer() + ","
-							+ p.getPath() + "\n";
+							+ p.getPath().trim() + "\n";
 					br.write(str);
 				} else {
 					str = "0,0,0,0,0\n";

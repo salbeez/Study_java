@@ -49,7 +49,6 @@ public class Admin_View extends JFrame {
 		init();
 		setting();
 		setSize(600, 550);
-		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 

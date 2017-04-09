@@ -5,11 +5,18 @@ import java.awt.event.ActionListener;
 
 public class Manager_Controll implements ActionListener{
 	
-	Controll_Admin con;
+	Controll_Admin cont_Admin;
+	UserController cont_User;
+	
 	public Manager_Controll() {
-		con = new Controll_Admin();
-		con.admin_view.setVisible(true);
-		con.admin_view.bt_re.addActionListener(this);
+		cont_Admin = new Controll_Admin();
+		cont_User = new UserController();
+		
+		cont_Admin.admin_view.setVisible(false);
+		cont_Admin.admin_view.bt_re.addActionListener(this);
+		
+		cont_User.uv.setVisible(true);
+		cont_User.uv.bt_admin.addActionListener(this);
 	}
 
 	public static void main(String[] args) {
@@ -18,10 +25,19 @@ public class Manager_Controll implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() ==con.admin_view.bt_re){
-			System.out.println("메인 컨트롤 에서 적용");
-			con.admin_view.setVisible(false);
-			con.farm_view.setVisible(true);
+		if(e.getSource() ==cont_Admin.admin_view.bt_re){
+			cont_Admin.admin_view.setVisible(false);
+			
+			//한개의 버튼을 2개의 리스너가 감시시 메인 리스너 먼저 실행후 다 끝나면 그다음 하위 리스너가 실행 
+			cont_Admin.model.currentSellItems(cont_Admin.sellItems);
+			
+			cont_User.initialize();
+			cont_User.uv.setVisible(true);
+			
+		}else if(e.getSource() ==cont_User.uv.bt_admin){
+			cont_Admin.admin_view.setVisible(true);
+			cont_User.uv.setVisible(false);
+			
 		}
 	}
 }
