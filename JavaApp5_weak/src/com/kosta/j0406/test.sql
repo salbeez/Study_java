@@ -1,2 +1,2 @@
 
-drop table dept03;
+drop table dept
