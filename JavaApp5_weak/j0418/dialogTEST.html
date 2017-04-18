@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	<script type="text/javascript">
+		alert("alert 메시지 대화상자");	//대화상자에서는 공백이 적용이됨
+		
+		if(confirm("예 아니오 대화상자")){//리턴값이 bool
+			document.write("<h3>예를 눌렀습니다</h3>");
+			alert("왜 예를 눌렀나요?? 다음 부턴 아니오를 누르세요");
+		} else{
+			document.write("<h3>아니오를 눌렀습니다</h3>");
+			alert("왜 아니오를 눌렀나요?? 다음 부턴 예를 누르세요");
+			// 브라우저에 쓰는 것보다 ,alert가 더 우선순위이다. 
+		}
+		
+		alert(prompt("좋아하는 과일은 ??"))
+		var aa = prompt("aa", "bb")//출력 메시지 , 기본값 (textField)에 이미 써져 있는 값
+		if(aa.length<=0){
+			document.write("<h3>아무것도 쓰지 않았습니다</h3>");
+		}
+	</script>
+
+</head>
+<body>
+
+</body>
+</html>

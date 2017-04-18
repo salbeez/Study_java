@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+	function test(x,y) {
+		document.getElementById("name").innerHTML=x*j;
+	}
+	function hello(){
+		document.write("aaas<br>");
+	}
+	function hello(name){//	다른 공간에서 오버 로딩은 없고 다만 위에서 정의한 함수에 대해서는 오버로딩이 가능함 
+		document.write(name+"<br>");
+	}
+</script>
+
+</head>
+<body>
+	<script >
+		var i = 10;
+		var j = 20;
+		test(i,j);// 인터 프리터 방식이라서 호출을 위에서 하면 인식 못함
+	</script>
+	<h1 id="name"></h1>
+	<input type="button" value="test" onclick="test(i,j)">
+	<input type="button" value="HELLO()" onclick="hello()">
+	<input type="button" value="HELLO(name)" onclick="hello(window.prompt('이름을 적으시오'))">
+</body>
+</html>
