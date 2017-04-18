@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 id="demo">My Web Page</h1>
+
+	<button type="button" onclick="myFunc()">click me</button>
+	<button type="button" onclick="myReturn()">return msg</button>
+	<hr>
+	<script>
+		document.write("Java S");
+		function myFunc() {
+			var myParagraph = document.getElementById("demo");
+			myParagraph.innerHTML = "Hello world!";
+		}
+		function myReturn() {
+			var myMsg = document.getElementById("demo");
+			myMsg.innerHTML = "My Web Page";
+		}
+		
+		 window.alert("alert");
+		    document.write("document.write");
+		    document.getElementById("demo").innerHTML = "innerHTML";
+		    console.log("console.log");
+		
+		    for(i=0;i<10;i++){
+		    	document.write(i+"<br>");
+		    }
+	</script>
+</body>
+</html>

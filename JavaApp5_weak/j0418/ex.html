@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3>브라우저에 1~5까지 옆으로 출력</h3>
+	<script>
+		for (var i = 1; i < 6; i++) {
+			document.write(i + " ")
+		}
+	</script>
+	<br>
+	<hr>
+	<h3>브라우저에 5~1까지 밑으로 출력</h3>
+	<script>
+		for (var i = 5; i > 0; i--) {
+			document.write(i + "<br>")
+		}
+	</script>
+	<hr>
+
+	<h3>브라우저에 3,6,9,12까지 옆으로 출력</h3>
+	<script>
+		for (var i = 1; i < 5; i++) {
+			if (i == 4) {
+				document.write(3 * i)
+			} else {
+				document.write(3 * i + ",")
+			}
+		}
+	</script>
+	<br>
+	<hr>
+
+	<h3>브라우저에 3단 출력</h3>
+	<script>
+		for (var i = 1; i < 10; i++) {
+			document.write("3 *" + i + "=" + 3 * i + "<br>");
+		}
+	</script>
+	<hr>
+
+	<h3>브라우저에 구구단 열 맞춰서 출력</h3>
+	<table cellpadding="5">
+		<script>
+			for (var i = 1; i < 10; i++) {
+				document.write("<tr>")
+				for (j = 1; j < 10; j++) {
+					document.write("<td>" +
+						j + " * " + i + " = " + i * j +
+						"</td>");
+				}
+				document.write("</tr>")
+			}
+		</script>
+	</table>
+	<font color="blue"></font>
+	<h3>안녕을 10번 출력 단 짝수 파랑 홀수 빨강색으로 표시</h3>
+	
+	<script type="text/javascript">
+		for(var i =0;i<10; i++){
+			if(i%2==0){
+				document.write("<font  color=blue > 안녕</font>");
+			}else{
+				document.write("<font  color=red > 안녕</font>");
+			}
+		}
+	</script>
+</body>
+</html>

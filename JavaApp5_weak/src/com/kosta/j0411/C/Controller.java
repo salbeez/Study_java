@@ -21,7 +21,6 @@ public class Controller implements ActionListener {
 	MainView main_v;
 	InputForm form;
 	UpForm upform;
-	PersonDAO dao;
 
 	public Controller() {
 		main_v = new MainView();
@@ -29,7 +28,7 @@ public class Controller implements ActionListener {
 		upform = new UpForm();
 		eventUp();
 
-		dao = new PersonDAO();
+
 		main_v.bt_delete.setEnabled(false);
 		main_v.bt_update.setEnabled(false);
 	}
@@ -88,11 +87,11 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 
-		if (obj == main_v.bt_insert) {
+		if (obj == main_v.bt_insert) {//------------------------------------------------------------
 			main_v.setVisible(false);
 			form.setVisible(true);
 		} else if (obj == form.bt_submit) {// 입력폼 -> 입력 버튼 누름
-
+			PersonDAO dao = new PersonDAO();
 			PersonDTO person = new PersonDTO();
 
 			person.setName(form.tf_name.getText());
@@ -119,6 +118,7 @@ public class Controller implements ActionListener {
 			upform.setVisible(true);
 
 		} else if (obj == upform.bt_submit) {
+			PersonDAO dao = new PersonDAO();
 			int row = main_v.table.getSelectedRow();
 			int no = Integer.parseInt(main_v.table.getValueAt(row, 0).toString());
 			System.out.println(no);
@@ -138,10 +138,12 @@ public class Controller implements ActionListener {
 			main_v.bt_delete.setEnabled(false);
 			main_v.bt_update.setEnabled(false);
 		} else if (obj == main_v.bt_search_name) {
+			PersonDAO dao = new PersonDAO();
 			String name = JOptionPane.showInputDialog("검색할 단어로 시작하는 모든 이름을 찾습니다");
 			main_v.displayTable(dao.select(name));
 
 		} else if (obj == main_v.bt_delete) {// 삭제
+			PersonDAO dao = new PersonDAO();
 			int row = main_v.table.getSelectedRow();
 			int no = Integer.parseInt(main_v.table.getValueAt(row, 0).toString());
 			if (dao.delete(no)) {
@@ -151,6 +153,7 @@ public class Controller implements ActionListener {
 			main_v.bt_delete.setEnabled(false);
 			main_v.bt_update.setEnabled(false);
 		} else if (obj == main_v.bt_search_all) {
+			PersonDAO dao = new PersonDAO();
 			main_v.displayTable(dao.selectAll());
 		} else if (obj == main_v.bt_exit) {
 			System.exit(0);

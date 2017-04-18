@@ -11,6 +11,13 @@ create table person
 --시퀀스
 drop sequence person_seq;
 create sequence person_seq
+	start with 3
+	increment by 1
+	nocycle --유일무의한 값
+	nocache;
+	
+drop sequence age_seq;	
+create sequence age_seq
 	start with 1
 	increment by 1
 	nocycle --유일무의한 값

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<script type="text/javascript">
+	//document.getElementById("e1") 주소값을 받아오고
+	function result(f) {
+		var i = parseInt(f.e1.value);
+		var j = parseInt(f.e2.value);
+		var op = f.operator;
+		//	console.log(op.options[1].value);
+		//var op2 = op.options[op.selectedIndex].value;
+		var result;
+		var k = 10;
+		console.log(i + "" + j + "" + op.value);
+
+		if (op.value == 1) {
+			result = i + j;
+		} else if (op.value == 2) {
+			result = i - j;
+		} else if (op.value == 3) {
+			result = i * j;
+		} else if (op.value == 4) {
+			result = i / j;
+		} else {
+			result = i % j;
+		}
+		document.getElementById("e3").innerHTML = result;
+	}
+</script>
+
+
+</head>
+<body>
+	<br>
+	<form id="form">
+		<input id="e1" type="text" size="1"> <select id="operator">
+			<option value="1">+</option>
+			<option value="2">-</option>
+			<option value="3">*</option>
+			<option value="4">/</option>
+			<option value="5">%</option>
+		</select> <input id="e2" type="text" size="1">
+		<h3 id="e3"></h3>
+		<!-- e1 *(operator) e2 = e3  -->
+
+		<input id="i_result" type="button" value="=" onclick="result(form)">
+
+	</form>
+
+
+</body>
+</html>

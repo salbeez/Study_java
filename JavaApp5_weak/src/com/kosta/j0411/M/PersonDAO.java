@@ -58,8 +58,6 @@ public class PersonDAO { // DB관련 전담 클래스
 	public boolean insert(PersonDTO person) {
 
 		connect();
-
-		System.out.println("DB CONNECT Succ");
 		try {
 			stmt = conn.createStatement();
 			String sql = "insert into person values (person_seq.nextval,'" + person.getName() + "'," + person.getAge()
