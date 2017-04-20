@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+/*function largeImg() {
+	var img = document.img1;
+	img.width *= 2;
+	img.height *= 2;
+}
+
+function smallImg() {
+	var img = document.img1;
+	img.width /= 2;
+	img.height /= 2;
+}*/
+
+	function reSizeImg(size) {
+		var img = document.img1;
+		var w,
+			h;
+
+		if (size === 'L') {
+			img.width *= 2;
+			img.height *= 2;
+		} else if (size === 'S') {
+			img.width /= 2;
+			img.height /= 2;
+		} else {
+			img.width = 300;
+			img.height = 300;
+		}
+	}
+	function init() {
+		var img = document.img1;
+		w = img.width;
+		h = img.height;
+	}
+	var flag = true;
+	function changeImg() {
+		var img2 = document.getElementById("imgimg");
+
+		var path1 = "../image/ice.gif"
+		var path2 = "../image/IceCream.gif"
+
+		if (flag) {
+			//방법 2개
+			img2.src = path2;
+			//img2.setAttribute("src", path2)
+			img2.removeAttribute("border");
+			flag = false;
+		} else {
+			img2.setAttribute("src", path1)
+			flag = true;
+		}
+	}
+
+	function changeImg2(no) {
+		//no = 1(over),2(down),3(out)?
+		if(no===1) {
+			document.imgimg2.src = '../image/딸기_핫케익.gif';
+		} else if(no===2) {
+			document.imgimg2.src = '../image/초코 뭍은 와플.gif';			
+		} else { 
+			document.imgimg2.src = '../image/일본식 국수.gif';
+		}		
+	}
+</script>
+</head>
+<body onload="init()">
+	<img alt="대체 문자열" src="../image/cake.gif" width="200" height="200"
+		name=img1 border="1">
+	<br>
+	<hr>
+	<input type="button" value="크게" onclick="reSizeImg('L')">
+	<input type="button" value="작게" onclick="reSizeImg('S')">
+	<input type="button" value="중간" onclick="reSizeImg('M')">
+	<hr>
+	<h3>문제 이미지1를 클릭하면 이미지 2로 변경</h3>
+	<img alt="경로를 찾지 못함" src="../image/ice.gif" onclick="changeImg()"
+		id="imgimg">
+
+	<h3>문제 이미지에 마우스를 올리면 다른 이미지로 변경</h3>
+	<img alt="경로를 찾지 못함" src="../image/redCake.gif" onmouseover="changeImg2(1)"
+		onmousedown="changeImg2(2)" onmouseout="changeImg2(3)" name="imgimg2">
+</body>
+</html>

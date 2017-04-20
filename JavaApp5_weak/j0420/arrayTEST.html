@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+	myArray = new Array(5);
+	document.write(myArray.length);
+
+	myArray[0] = 11;
+	myArray[1] = true;
+	myArray[2] = '홍길동';
+	myArray[3] = 123.12;
+	myArray[4] = new Date();
+	var i
+	for (i = 0; i < myArray.length; i++) {
+		document.write('<br>myArray[' + i + '] = ' + myArray[i])
+	}
+
+	/*
+	 * '{}'표기는 JSON(자바 스크립트 오브젝트 Notation)
+	 * 형식) 자바의 MAP 또는 Properties와 비슷(key, value쌍으로 데이터를 저장)
+	 * var 변수명 = {key:value, ...};
+
+	 - var v = {}; =>v object;와 같다
+	 	 =>var v = new object();동일함
+	 */
+	var arr = [ 11, 22, 33 ];
+	document.write('<hr>');
+	for (i = 0; i < arr.length; i++) {
+		document.write('<br>' + arr[i]);
+	}
+	document.write('<hr>');
+
+	var p = {
+		name : '홍길동',
+		age : '13',
+		job : '학생'
+	}
+	document.write('<br>p.name =' + p.name)
+	document.write('<br> p.age =' + p.age)
+	document.write('<br>p.job =' + p.job + '<br>')
+
+	var myArray2 = [ [ 1 ], [ 1, 2 ], [ 1, 2, 3 ] ];
+	for (var i = 0; i < myArray2.length; i++) {
+		for (var j = 0; j < myArray2[i].length; j++) {
+
+			document.write(myArray2[i][j]);
+		}
+		document.write('<br>');
+	}
+	var persons = [
+		{
+			"name" : "홍길동",
+			"age" : "13",
+			"job" : "학생"
+		},
+		{
+			"name" : "홍길동",
+			"age" : "13",
+			"job" : "학생"
+		},
+		{
+			"name" : "홍길동",
+			"age" : "13",
+			"job" : "학생"
+		}
+	];
+
+	for (var i = 0; i < persons.length; i++) {
+		document.write(persons[i].name + "," + persons[i].age + "," + persons[i].job + '<br>');
+	}
+
+	var myArray3 = [ "사과", "딸기", "바나나", "복숭아" ];
+	myArray3.pop() //스택구조로 빠진다
+	myArray3.pop()
+	myArray3.pop()
+	for (var i = 0; i < myArray3.length; i++) {
+		document.write('<br>myArray3[' + i + '] = ' + myArray3[i]);
+	}
+	document.write('<br>')
+	myArray3.push('수박')
+	myArray3.push('메론', '포도')
+	myArray3.push('당근')
+	for (var i = 0; i < myArray3.length; i++) {
+		document.write('<br>myArray3[' + i + '] = ' + myArray3[i]);
+	}
+	document.write('<hr>')
+	myArray3.reverse();
+	for (var i = 0; i < myArray3.length; i++) {
+		document.write('<br> myArray3[' + i + '] = ' + myArray3[i])
+	}
+	document.write('<hr>')
+	myArray3.sort();
+	for (var i = 0; i < myArray3.length; i++) {
+		document.write('<br> myArray3[' + i + '] = ' + myArray3[i])
+	}
+	
+	var now = new Date();
+	var aa = ['일','월','화','수','목','금','토'];
+	document.write('<hr>'+now.getFullYear()+'년 '+(now.getMonth()+1)+'월 '+now.getDate()+'일 '+now.getHours()+'시 '+now.getMinutes()+'분 '+now.getSeconds()+'초 ('+aa[now.getDay()]+')');
+</script>
+</head>
+<body>
+
+</body>
+</html>

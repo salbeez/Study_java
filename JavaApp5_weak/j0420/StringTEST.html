@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+	var str = 'JavaScript~!!';
+	document.write('str의 문자열 길이 '+str.length);
+	document.write('<br>S의 인덱스 '+str.indexOf('S'));
+	document.write('<br>s의 인덱스 '+str.indexOf('s'));
+	document.write('<br>인덱스 2의 문자 '+str.charAt(2));
+	
+	document.write('<hr>')
+	for(var i=0; i<str.length; i++){
+		document.write('<br>'+i+" : "+ str.charAt(i))
+	}
+	document.write('<hr>')
+	document.write(str.substring(str.indexOf('S'),str.indexOf('~')))
+	// str.trim IE8버전 이하는 지원 안함
+	
+	document.write('<hr>')
+	var str3 = '010-6573-0925'
+	var arry=str3.split('-');
+	for(var i=0; i<arry.length;i++){
+		document.write('arry['+i+'] = '+arry[i]+'<br>');
+	}
+</script>
+</head>
+<body>
+
+</body>
+</html>

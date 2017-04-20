@@ -3,52 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>숫자 야구 게임</title>
-
-<script>
-	function enterTF() {
-		document.getElementById("ta").innerHTML = document.getElementById("tf_input").value
-		var str=document.getElementById("tf_input").value
-		alert(str)
-		
-		 if(!str.match("[0-9]{3}")){//세자리 숫자가 아니라면!!
-			alert("세자리 숫자만 입력!!");
-		 }
-	}
-</script>
+<!-- form안에 input 객체가 있는경우 이벤트(onkeypress 키 중에서도 엔터)를 사용시 자동 submit기능 
+	   button 객체는 얘는 이벤트 전부다 자동 submit기능 -->
+<script src="../js/base.js"></script>
 </head>
-<body>
+<body onload="ruleDescription()">
 
 	<!-- /JavaApp5_weak/src/com/kosta/notePad에 baseBall2참고 -->
 
 	<h3>숫자 야구 게임</h3>
 
-	<form id="leftF">
+	<form name="form">
 		<table>
 			<tr>
-				<td><textarea rows="20" cols=60 " readonly="readonly" id="ta">
-			<숫자야구게임>
-1. 게임시작을 위해서 새게임버튼을 클릭
-2. 입력에 중복되지않는 세자리수를 입력 후 엔터
-3. 숫자와 자릿수를  맞추면 Strike숫자만 맞추면 Ball이 추가됩니다.
-4. 정답을 보고 싶으면 정답버튼을 클릭
-5. 기타 문의사항이 있으면 관리자에게 연락바람 (070-5039-5815)
-			</textarea></td>
+				<td><textarea rows="20" cols=60 readonly="readonly" id="ta"
+						name="ta">
+					   </textarea></td>
+
 				<td>
 					<table cellpadding="5">
 						<tr>
-							<td><input type="button" value="새게임" id="newGameB"><br></td>
+							<td><input type="button" value="새게임" id="newGameB" onclick="initGame(), createNum()"><br></td>
 						</tr>
 
 						<tr>
-							<td><input type="button" value="지우기" id="clearB"><br></td>
+							<td><input type="button" value="지우기" id="clearB" onclick="initText()"><br></td>
 						</tr>
 
 						<tr>
-							<td><input type="button" value="정답" id="solutionB"><br></td>
+							<td><input type="button" value="정답" id="solutionB" onclick="soution_B()"><br></td>
 						</tr>
 
 						<tr>
-							<td><input type="button" value="힌트" id="hintB"><br></td>
+							<td><input type="button" value="힌트" id="hintB" onclick="hint_B()"><br></td>
 						</tr>
 
 						<tr>
@@ -59,11 +46,11 @@
 			</tr>
 		</table>
 
-		<br> 입력 : <input type="text" id="tf_input" onkeypress="if( event.keyCode==13 ){enterTF();}" />
 	</form>
-
-	<form id="rightF"></form>
-
-
+	<br> 입력 :
+	<input type="text" id="tf_input" onkeypress="enterTF();" />
 </body>
+<script>
+	exitGame();// 처음 시작할 때 등등.. 비활성화
+</script>
 </html>

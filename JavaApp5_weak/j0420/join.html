@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="../js/myjoin.js"></script>
+<title>회원가입</title>
+</head>
+<!-- 등록 버튼을 클릭하면 환영 메시지 창이 나옴 -->
+<!-- action="" 
+		name="" 
+		method="get" 
+		enctype="application/x-www-form-urlencoded" 
+-->
+<body>
+	<form action="welcome.html" name="form">
+		<table border="1" cellpadding="5">
+			<tr bgcolor="pink">
+				<th></th>
+				<th></th>
+			</tr>
+
+			<tr>
+				<td>Id :</td>
+				<td><input name="id"> <input type="button"
+					value="중복확인" id="dupleChek"></td>
+			</tr>
+
+			<tr>
+				<td>비번 :</td>
+				<td><input type="password" name="pass"></td>
+			</tr>
+
+			<tr>
+				<td>비번 확인 :</td>
+				<td><input type="password" name="pass2"></td>
+			</tr>
+			<tr>
+				<td>이름 :</td>
+				<td><input type="text" name = "name"></td>
+			</tr>
+
+			<tr>
+				<td>주민 번호 :</td>
+				<td><input type="text" size="6" maxlength="6" name="ssn" onkeyup="movejumin()"> - <input
+					type="password" size="7" maxlength="7" name ="ssn2"></td>
+			</tr>
+
+			<tr>
+				<td>전화번호 :</td>
+				<td><input type="text" size="1" name="tel"> - <input type="text"
+					size="1" name="tel2"> - <input type="text" size="1" name="tel3"></td>
+			</tr>
+
+			<tr>
+				<td>주소 :</td>
+				<td><input type="text" size="50%" name="addr"></td>
+			</tr>
+
+			<tr>
+				<td>직업 :</td>
+				<td><select name="jobs">
+						<option>옵션</option>
+						<option>학생</option>
+						<option>무직</option>
+						<option>주부</option>
+						<option>군인</option>
+						<option>망나니</option>
+						<br>
+				</select></td>
+			</tr>
+
+			<tr>
+				<td colspan="2" align="center"></td>
+			</tr>
+		</table>
+		<input type="button" value="등록" onclick="validCheck()"> 
+		<input type="reset" value="취소">
+	</form>
+
+</body>
+</html>

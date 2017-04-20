@@ -4,7 +4,7 @@ public class QuicksortTEST {
 	static int i = 0;
 
 	public static void main(String[] args) {
-		int[] arr = { 69, 10, 30, 2, 16, 8, 31, 22 };
+		int[] arr = { 3,5,10,2,6,11 };
 		printArr(arr);
 		quickSort(arr, 0, arr.length - 1);
 	}

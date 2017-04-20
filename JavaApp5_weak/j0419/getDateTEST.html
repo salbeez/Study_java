@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script>
+	function print() {
+		var name = document.getElementById("tf_name").value;
+		var pw = document.getElementById("tf_pw").value;
+	
+		var rg = document.getElementById("rg");
+		var sel = document.getElementById("select").value;
+		var ta = document.getElementById("ta").value;
+		
+	
+		var fruit='';
+		if(document.getElementById("ap").checked){
+			fruit += document.getElementById("ap").value;
+		}
+		if(document.getElementById("st").checked){
+			fruit += document.getElementById("st").value;
+		}
+		if(document.getElementById("ba").checked){
+			fruit += document.getElementById("ba").value;
+		}
+		
+		if(sel=="1"){
+			sel="한식";
+		}else if(sel == "2"){
+			sel = "중식"
+		}else {
+			sel = "양식"
+		}
+		var room;
+		for(var i=0 ; i<rg.room.length;i++){
+			if(ra[i].check){
+			room = rg.room[i].value
+			alert("a")
+			break;
+			}
+		}
+		alert(name+"\n"+pw+"\n"+sel+"\n"+ta+"\n"+room+"\n"+fruit);
+	}
+</script>
+
+</head>
+<body>
+	<h3>데이터 값 얻어오기</h3>
+	<hr>
+	<form id="form">
+
+		이름 : <input type="text" id="tf_name"> 
+		<br>비번 : <input type="text" id="tf_pw"> 
+		<br>좋아하는 과일 : <input type="checkbox" value="사과" id="ap">
+								<input type="checkbox" value="딸기" id="st"> 
+								<input type="checkbox"value="바나나" id="ba"> 
+		
+		<br>강의실 :
+		<div id="rg">
+			<input type="radio" value="1강의실" name="room"> 1
+			<input type="radio" value="2강의실" name="room"> 2
+			<input type="radio" value="3강의실" name="room"> 3
+			<input type="radio" value="4강의실" name="room"> 4
+			<input type="radio" value="5강의실" name="room"> 5
+		</div>
+		<br>점심 메뉴 : <select id="select">
+			<option value="1">한식</option>
+			<option value="2">중식</option>
+			<option value="3">양식</option>
+		</select> <br>메모 :
+		<textarea rows="10" cols="50" id="ta"></textarea>
+	</form>
+	
+	<input type="button" value="선택된 내용 출력" onclick="print()">
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/myfun.js"></script>
+<script type="text/javascript">
+	function calcT() {
+		
+		var form = document.calcForm;
+		var su1 = form.su1.value;
+		var su2 = form.su2.value;
+		
+		if(su1==='' ||  su2===''){
+			alert("두개의 수를 입력!");
+			return;
+		}
+		
+		if(isNaN(su1) || isNaN(su2)){
+			alert("숫자만 입력");
+			form.su1.value ='';
+			form.su2.value ='';
+			return;
+		}
+		
+		
+		var result = plus(su1,su2);
+		document.calcForm.result.value=result;
+	}
+</script>
+</head>
+<body>
+
+
+	<h3>계산기</h3>
+	<hr>
+
+	<form name="calcForm">
+		<div align="center">
+			<input type="text" size="2" name="su1"> + <input type="text"
+				size="2" name="su2"> <input type="button" value="계산" size="2" onclick="calcT()"> 
+				<br>결과값 : <input type="text" size="4" name="result" readonly="readonly">
+		</div>
+	</form>
+
+
+</body>
+</html>
