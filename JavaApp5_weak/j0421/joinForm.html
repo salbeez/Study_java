@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>회원가입</title>
+  <script type="text/javascript">
+     function validCheck(){
+    	 //alert('validCheck');
+    	/*    	
+    	<유효성검사>
+    	1.아이디,비번,비번확인,이름,주민번호,주소에 대한 빈값체크
+    	----> 빈값일때 입력 메시지(alert) 출력
+    	2.비번과 비번확인 일치 체크
+    	3.주민번호의 숫자값과 자릿수 체크
+    	4.직업을 선택했는지 체크    	    	
+    	*/
+    	
+    	//폼내의 데이터 얻어오기 ==> document.폼이름.지정이름.value
+    	var f=document.joinForm;//f: <form>엘리먼트
+    	
+    	var id=f.id.value;
+    	var pass=f.pass.value;
+    	var pass2=f.pass2.value;
+    	var name=f.name.value;
+    	var jumin1=f.jumin1.value;
+    	var jumin2=f.jumin2.value;
+    	var tel1=f.tel1.value;
+    	var tel2=f.tel2.value;
+    	var tel3=f.tel3.value;
+    	var addr=f.addr.value;
+    	var job=f.job.value;
+    	
+    	if(id==''){
+    	   alert('아이디입력!!');
+    	   f.id.focus();
+    	}else if(pass==''){
+    		alert('비번입력!!');
+    		f.pass.focus();
+    	}else if(pass2==''){
+    		alert('비번입력!!');
+    		f.pass2.focus();
+    	}else if(pass !== pass2){
+    		alert('비번이 일치하지 않습니다!!');
+    		f.pass.value='';
+    		f.pass2.value='';
+    		f.pass.focus();    		
+    	}else if(name==''){
+    		alert('이름입력!!');
+    		f.name.focus();
+    	}else if(jumin1=='' || jumin2==''){
+    		alert('주민번호입력!!');
+    		f.jumin1.focus();
+    	}else if(isNaN(jumin1) || isNaN(jumin2) ||
+    			  jumin1.length!=6 || jumin2.length != 7){
+    	    alert('올바르지 않은 주민번호입니다!!');
+    	    f.jumin1.value='';
+    	    f.jumin2.value='';
+    	    f.jumin1.focus();
+    	    
+    	}else if(addr==''){
+    		alert('주소입력!!');
+    		f.addr.focus();
+    	}else if(job=='==선택=='){
+    		alert('직업을 선택!!');
+    	}else{//정상적인 데이터 입력!!
+    		document.joinForm.submit();
+    	} 
+    	
+    	
+    	
+    	//---->적합한 데이터: 페이지 이동
+    //document.joinForm.submit();//joinForm의 action에 정의된 페이지로 이동(전송).
+    	//---->적합하지 않은 데이터: 페이지 이동 X
+    	
+     }//validCheck
+     
+     function checkId(){
+    	window.open('confirm_id.html','confirm',
+    	 'width=200,height=100,left=300,top=200');
+     }
+  </script>
+</head>
+<!-- joinForm.html -->
+<body>
+ <center>
+ <h3>회원가입</h3>
+ <form name="joinForm" 
+       action="welcome.html" >
+  <table  cellpadding="5" bgcolor="eeeeee">
+    <tr>
+      <td>I  D<font color="red">*</font>:</td>
+      <td>
+           <input type="text" size="10" name="id" readonly
+                  onclick="checkId()"> 
+          <input type="button" value="중복확인" onclick="checkId()">
+      </td>
+    </tr>
+    <tr>
+      <td>비  번<font color="red">*</font>:</td>
+      <td>
+           <input type="password"  size="10" name="pass"> 
+      </td>
+    </tr>
+    <tr>
+      <td>비번확인<font color="red">*</font>:</td>
+      <td>
+           <input name="pass2" type="password"  size="10" > 
+      </td>
+    </tr>
+    <tr>
+      <td>이  름:</td>
+      <td>
+           <input type="text"  size="10" name="name"> 
+      </td>
+    </tr>
+    <tr>
+      <td>주민번호:</td>
+      <td>
+           <input type="text" size="6" maxlength="6" name="jumin1"> 
+           -
+           <input type="password" size="7" maxlength="7" name="jumin2">
+      </td>
+    </tr>
+    <tr>
+      <td>전화번호:</td>
+      <td>
+           <input type="text" size="3" name="tel1"> -
+           <input type="text" size="3" name="tel2"> -
+           <input type="text" size="3" name="tel3"> 
+      </td>
+    </tr>
+    <tr>
+      <td>주  소:</td>
+      <td>
+           <input type="text" name="addr"> 
+      </td>
+    </tr>
+    <tr>
+      <td>직  업:</td>
+      <td>
+           <select name="job">
+              <option value="==선택==">==선택==</option>
+              <option value="학생">학생</option>
+              <option value="공무원">공무원</option>
+              <option value="언론/출판">언론/출판</option>
+              <option value="군인/경찰">군인/경찰</option>
+              <option value="일반사무직">일반사무직</option>
+              <option value="영업직">영업직</option>
+              <option value="기술/전문직">기술/전문직</option>
+              <option value="보건/의료">보건/의료</option>
+              <option value="자영업">자영업</option>
+              <option value="주부">주부</option>
+              <option value="기타">기타</option>
+           </select>
+      </td>
+    </tr>
+    <tr>      
+      <td colspan="2" align="center">
+      </td>
+    </tr>
+  </table>  
+           <input type="button" value="등록" onclick="validCheck()"> 
+           <input type="reset" value="취소"> 
+ </form>  
+ </center>
+</body>
+</html>
+
+
+

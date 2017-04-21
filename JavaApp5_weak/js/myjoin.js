@@ -14,21 +14,26 @@ function validCheck() {
 	 * 비번과 비번확인 일치 체크
 	 * 주민 번호의 숫자값 체크 및 자릿수 체크
 	 * 직업을 선택했는지 체크*/
-	if(idCh() && nameCh() && pwCh() && ssnCh() && jobCh()){
-		if(pwCheck()){
-		
+	if (idCh() && nameCh() && pwCh() && ssnCh() && jobCh()) {
+		if (pwCheck()) {
 			document.form.submit(); //joinForm의 action에 정의된 페이지로 이동(전송)			
 		}
 	}
-	
+
 //아닐경우 페이지 이동
+}
+function duplecation() {
+		window.open('duplecate.html', 'child',
+			'toolbar=yes,location=1,status=1,menubar=1,' +
+			'scrollbars=no,resizable=yes,width=400,' +
+			'height=200,top=100,left=100');
 }
 
 function pwCheck() {
-	if(form.pass.value ===form.pass2.value){	
-		if(passwordRules .test(form.pass.value)){
-			return true;			
-		}else{
+	if (form.pass.value === form.pass2.value) {
+		if (passwordRules.test(form.pass.value)) {
+			return true;
+		} else {
 			alert("최소 1개의 숫자,문자, 특수 문자를 포함 [8~16자리]")
 			return false;
 		}
@@ -37,21 +42,21 @@ function pwCheck() {
 	return false;
 }
 
-function jobCh(){
-	if(form.jobs.value =='옵션'){
+function jobCh() {
+	if (form.jobs.value == '옵션') {
 		alert("직업을 선택하시오");
 		return false;
-	}else{
+	} else {
 		return true;
 	}
-	
+
 }
 
-function pwCh(){
-	if(form.pass.value.length>0 && form.pass2.value.length>0){
+function pwCh() {
+	if (form.pass.value.length > 0 && form.pass2.value.length > 0) {
 		return true;
 	}
-	console.log(form.pass.value.length + "  "+ form.pass2.value.length)
+	console.log(form.pass.value.length + "  " + form.pass2.value.length)
 	alert("비번 과 비번확인을 쓰시오")
 	return false;
 }
@@ -79,7 +84,7 @@ function ssnCh() {
 	return false
 }
 
-function init(){
+function init() {
 	form.id.value = '';
 	form.pass.value = '';
 	form.pass2.value = '';
@@ -92,8 +97,8 @@ function init(){
 	form.addr.value = '';
 }
 
-function movejumin(){
-	if(form.ssn.value.length ==6){
+function movejumin() {
+	if (form.ssn.value.length == 6) {
 		form.ssn2.focus();
 	}
 }

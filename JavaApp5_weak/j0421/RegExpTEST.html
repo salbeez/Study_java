@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body id="body">
+	<h3>RegExp 테스트</h3>
+	<hr>
+	<script>
+		var tst = 'abc1';
+		patten = /(^[a-zA-Z]+) | ([0-9]+)$/g;
+		document.write(patten.test(tst)+'<br>')
+		//?(0,1) *(0~) +(1~)
+		
+		var str2 ='123456';		
+		var regExp = new RegExp('^[0-9]+$','g');
+		document.write(''+regExp.test(str2)+'<br>')
+		
+		var str3 = '!a123456'
+		document.write(''+str3.length+'<br>')
+		var regExp2 = new RegExp('^[a-zA-Z][0-9a-zA-Z]{7,11}$','g');//8~12
+		document.write(''+regExp2.test(str3)+'<br>')
+		
+		var regExp3 = new RegExp('^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$','g');//8~12
+		document.write(''+regExp3.test(str3)+'<br>')
+		
+		var passwordRules = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+		document.write(''+passwordRules.test(str3)+'<br>')
+		
+		function aa(){
+			console.log("a")
+			document.getElementById("body").innerHTML=''
+		}
+		
+		function bb(){
+			var a= document.getElementById("p1")
+			alert(a.innerHTML)
+			a.innerHTML='즐거운 주말 되세여'
+		}
+	</script>
+	<pre id="per">adsga
+	adslgkjas'dklg
+		lasdfjklasd
+					asdg;
+				jas
+		g</pre>
+	<button onclick="aa()">전체 지우기</button>
+	<hr>
+	
+	<p id="p1">
+		aghasd;
+		asdfklasjgk;lja
+		awdklajdsgkl
+			askldgj;
+				asdklgj
+	</p>
+	<input type="button" onclick="bb()">
+</body>
+</html>
