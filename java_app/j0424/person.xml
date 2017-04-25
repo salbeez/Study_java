@@ -1,0 +1,39 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<!-- <?xml-stylesheet type='text/xsl' href="person.xsl"?> -->
+
+<!-- 문서형식: DTD(Document Type Definition) 
+       ==> 문서에 출현할 수 있는 엘리먼트(태그)와 속성을 정의 
+-->
+<!DOCTYPE persons [
+
+    <!-- 태그내의 데이터나 자식태그에 대한 정의 -->
+     <!ELEMENT persons (person+)>
+     <!ELEMENT person (name, age, job)>
+     <!ELEMENT name (#PCDATA)>
+     <!ELEMENT age (#PCDATA)>
+     <!ELEMENT job (#PCDATA)>
+
+]>
+
+
+<persons>
+	<person>
+	  <name>홍길동</name>
+	  <age>13</age>
+	  <job>학생</job>
+	</person>
+	<person>
+	  <name>길라임</name>
+	  <age>15</age>
+	  <job>학생</job>
+	</person>
+	<person>
+	  <name>김주원</name>
+	  <age>17</age>
+	  <job>학생</job>
+	</person>
+</persons>
+
+<!-- 나주석 -->
+
+

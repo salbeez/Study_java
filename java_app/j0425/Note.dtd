@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT note (to,from,heading,body,mycar)>
+<!ELEMENT to (#PCDATA)>
+<!ELEMENT from (#PCDATA)>
+<!ELEMENT heading (#PCDATA)>
+<!ELEMENT body (#PCDATA)>
+
+<!ELEMENT mycar EMPTY>
+	<!ATTLIST mycar
+		is_blue (yes|no) “yes”
+		brandname ID #REQUIRED 
+		description CDATA #IMPLIED 
+	>
