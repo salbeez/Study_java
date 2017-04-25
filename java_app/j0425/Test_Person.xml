@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml-stylesheet type="text/css" href="person_style.css"?> -->
 <!DOCTYPE person SYSTEM "Person.dtd" >
 <person>
-  <name>name</name>
-  <age>age</age>
-  <job>job</job>
-  <gender/>
+  <name>홍길동</name>
+  <age>13</age>
+  <job>학생</job>
+
 </person>
