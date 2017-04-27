@@ -59,9 +59,9 @@ public class DOMTEST3 {
 			case Node.ELEMENT_NODE:
 				NodeList list = e.getChildNodes();
 				String tagName = e.getNodeName();
-					fo.write(("<"+tagName+">").getBytes());
+					fo.write(("<"+tagName+getAtt(e)+">").getBytes());
 				
-				System.out.print("<" + tagName + ">");
+				System.out.print("<" + tagName +getAtt(e)+ ">");
 				for (int i = 0; i < list.getLength(); i++) {
 					processNode(list.item(i));
 				}
@@ -99,7 +99,14 @@ public class DOMTEST3 {
 		}
 		// System.out.println(" 자식의 길이 : " + e.getChildNodes().getLength());
 	}
-
+	public String getAtt(Node e){
+		String str="";
+		for (int i = 0; i < e.getAttributes().getLength(); i++) {
+			Node attName = e.getAttributes().item(i);		
+			str +=" "+e.getAttributes().getNamedItem(attName.getNodeName());
+		}
+		return str;
+	}
 	public static void main(String[] args) {
 		new DOMTEST3();
 	}

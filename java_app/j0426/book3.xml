@@ -1,4 +1,12 @@
-<books a="10" b="20" c="30">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE books [
+	<!ELEMENT books (book)+>
+	<!ELEMENT book (title,author,price)>
+	<!ELEMENT title (#PCDATA)>
+	<!ELEMENT author (#PCDATA)>
+	<!ELEMENT price (#PCDATA)>
+]>
+<books>
 	<book>
 		<title>Java프로그래밍</title>
 		<author>외국 할아버지</author>
@@ -14,5 +22,5 @@
 		<author>외국 할아버지</author>
 		<price>8500</price>
 	</book>
-	<!-- 나 주석 -->
+	<!-- aa -->
 </books><!-- 너 주석 --><!-- 호로 -->

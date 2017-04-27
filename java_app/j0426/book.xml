@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<books>
+<books a="10" b="20" c="30">
 	<book>
 		<title>Java프로그래밍</title>
 		<author>외국 할아버지</author>
