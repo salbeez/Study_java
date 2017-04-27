@@ -83,7 +83,8 @@ public class DOMTEST7 {//
 				 root.appendChild(newRoot);
 				
 				 //6
-				Attr a2= doc.createAttribute("a-");
+				Attr a2= doc.createAttribute("a");
+				a2.setValue("10");
 				a.setAttributeNode(a2);
 				
 				processNode(doc);
@@ -110,9 +111,9 @@ public class DOMTEST7 {//
 			case Node.ELEMENT_NODE:
 				NodeList list = e.getChildNodes();
 				String tagName = e.getNodeName();
+				System.out.println(e.getAttributes().getNamedItem("a"));
 					fo.write(("<"+tagName+">").getBytes());
-				
-				System.out.print("<" + tagName + ">");
+				System.out.print("<" + tagName+ ">");
 				for (int i = 0; i < list.getLength(); i++) {
 					processNode(list.item(i));
 				}
@@ -137,6 +138,10 @@ public class DOMTEST7 {//
 				for (int i = 0; i < list2.getLength(); i++) {
 					processNode(list2.item(i));
 				}
+				break;
+			case Node.ATTRIBUTE_NODE:
+				Node attName = e.getAttributes().item(0);
+				System.out.println("==="+attName.getNodeType());
 				break;
 			default:
 				break;
