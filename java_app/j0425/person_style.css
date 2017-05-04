@@ -1,0 +1,12 @@
+person {
+	background-color: #ffffff;
+	width: 100%
+}
+name,age,job,gender {
+	display: block;
+	color: #000000;
+	margin-left: 20pt;
+}
+table th,td{
+	border: 1px solid black;
+}

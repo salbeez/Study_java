@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<root>
+	<su>3 &lt; 5</su> <!-- "<" 에러 -->
+	<subject>xml &amp; Java</subject> <!-- "&" 에러 -->
+	
+	<content><![CDATA[
+		33<55
+		XML&JSP
+		<><>
+		&lt; &amp; &#169
+		===>태그 해성하지 말고 문자 그자체로 전달
+		<su>3 &lt; 5</su> <!-- "<" 에러 -->
+	]]>
+	</content>
+</root>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/XMLSchema"
+	xmlns:tns="http://www.example.org/XMLSchema" elementFormDefault="qualified">
+	
+	<!-- <!ELEMENT 태그명(자식) -->
+	<element name="root" >
+		<complexType>
+			<sequence>
+				<element ref="tns:str" minOccurs="1" maxOccurs="3"></element>
+				<element ref="tns:su"></element>
+				<!-- 양수=positiveInteger -->
+				<element name="my" type="positiveInteger"></element> 
+				<element name="jumin" type="tns:juminType"> </element>
+				<element name="cupSize" type="tns:cupType"/>
+			</sequence>
+		</complexType>
+	</element>
+	
+	
+	<element name="str" type="string"></element>
+	<element name="su" type="int"></element>
+	
+	<!-- 사용자 정의 자료형 -->
+	<simpleType name="juminType">
+		<restriction base="string">
+			<pattern value="\d{6}-\d{7}"></pattern>
+		</restriction>	
+	</simpleType>
+	
+	<simpleType name="cup1">
+		<restriction base="string">
+			<enumeration value="small"></enumeration>
+			<enumeration value="meddle"></enumeration>
+			<enumeration value="Large"></enumeration>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="cup2">
+		<restriction base="positiveInteger">
+			<minInclusive value="10"></minInclusive>
+			<maxInclusive value="50"></maxInclusive>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="cupType">
+		<union memberTypes="tns:cup1 tns:cup2"></union>
+	</simpleType>
+</schema>

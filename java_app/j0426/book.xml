@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books a="10" b="20" c="30">
+	<book>
+		<title>Java프로그래밍</title>
+		<author>외국 할아버지</author>
+		<price>32000</price>
+	</book>
+	<book>
+		<title>홍길동전</title>
+		<author>길라임</author>
+		<price>12500</price>
+	</book>
+	<book>
+		<title>셜록홈즈</title>
+		<author>외국 할아버지</author>
+		<price>8500</price>
+	</book>
+	<!-- 나 주석 -->
+</books>
+	<!-- 너 주석 -->
+	<!-- 호로 -->

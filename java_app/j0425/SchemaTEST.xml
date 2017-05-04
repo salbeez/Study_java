@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns="http://www.example.org/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/XMLSchema XMLSchema.xsd ">
+  <str>str</str>
+  <su>0</su>
+  <my>1</my>
+  <str>str가나다01234</str>
+
+  <su>-0124</su>
+  <my>10</my>  
+  <jumin>960302-2635687</jumin>
+  <cupSize>50</cupSize>
+  <cupSize>small</cupSize>
+</root>

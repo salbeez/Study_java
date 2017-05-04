@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT person (name,age,job,gender)+>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT job (#PCDATA)>
+<!ELEMENT gender EMPTY>
+<!ATTLIST gender
+	gender (Male|Female) "Male" #REQUIRED
+>
