@@ -7,7 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class DAO {
 	Connection conn;
@@ -15,10 +21,23 @@ public class DAO {
 	ResultSet rs;
 	Properties pro;
 
+	Context ctx;
+	DataSource ds;
+	public DAO() {
+		try {
+			ctx = new InitialContext();
+			Context tomCtx = (Context)ctx.lookup("java:comp/env");
+			ds = (DataSource)tomCtx.lookup("jdbc/oracle");
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public DAO(String root) {
 		try {
 			pro = new Properties();
-			pro.load(new FileReader(root+"/conn/conn.properties"));
+			pro.load(new FileReader(root + "/conn/conn.properties"));
 			System.out.println(pro.keySet());
 			Class.forName(pro.getProperty("driver"));
 		} catch (Exception e) {
@@ -74,6 +93,33 @@ public class DAO {
 			disconnect();
 		}
 
+		return users;
+	}
+
+	public List<UserInfo> findAll() {
+		/** @sql 각 사원의 사원번호, 사원명, 부서명 , 급여 등급을 검색 */
+		List<UserInfo> users = new ArrayList<>();
+		try {
+			conn = ds.getConnection();
+			String sql = "select empno, ename, dname, s.GRADE "
+					+ "from emp02 inner join dept using(deptno) , salgrade s "
+					+ "where sal BETWEEN s.losal AND s.hisal";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				UserInfo user = new UserInfo();
+				user.setEmpno(rs.getString("empno"));
+				user.setEname(rs.getString("ename"));
+				user.setDeptNo(rs.getString("dname"));
+				user.setSal(rs.getString("GRADE"));
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			disconnect();
+		}
 		return users;
 	}
 }

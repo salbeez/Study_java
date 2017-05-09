@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.kosta.t0508.UserInfo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.kosta.t0508.DAO"%>
@@ -13,7 +14,7 @@
 <body>
 	<%
 		DAO dao = new DAO(application.getRealPath("/"));
-		ArrayList<UserInfo> users = dao.selectAll();
+		List<UserInfo> users = dao.selectAll();
 	%>
 	<table border="1" cellpadding="5">
 		<tr bgcolor="#E1BEE7">
