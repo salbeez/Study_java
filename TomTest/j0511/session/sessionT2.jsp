@@ -1,3 +1,4 @@
+<%@page import="com.kosta.t0511.DAO_2"%>
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -54,8 +55,8 @@
 		response.sendRedirect("sessionT1.jsp");
 	} */
 	
+	DAO_2 dao = new DAO_2();
 	
-
 	//저장	map.put("id","pw" )
 %>
 <body>
