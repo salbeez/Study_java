@@ -1,0 +1,139 @@
+ 4. session(javax.servlet.http.HttpSession) ★★★
+    - 클라이언트에 대한 세션정보를 처리하기 위해 사용.
+    - 비연결형 프로토콜 HTTP
+      (한 페이지가 출력된 다음에 서버와 클라이언트 연결은 끊어짐.)에 대해
+       마치 계속 연결되어있는 것처럼 해주는 메커니즘.
+    - 쿠키는 사용자PC에 세션은 서버에 사용자와 관련된 정보를 보관.
+    
+    세션의 사용용도)
+      - 사용자 로그인
+      - 쇼핑몰에서 장바구니 기능 구현
+      - 사용자가 어떤 페이지를 다녀갔는지 웹 페이지 트래킹 기능을 구현.
+      
+    주요메소드)
+      getId()
+        - 각 접속에 대한 세션 고유의 ID를 문자열형태로 리턴.
+      getCreatingTime()
+        - 세션이 생성된 시간을 long형 밀리세컨드 값으로 리턴
+          (January 1, 1970 GMT기준)
+      getLastAccessedTime()
+        - 현재 세션으로 마지막 작업한 시간을 long형 밀리세컨드 값으로 리턴.
+      getMaxInactiveInterval()
+        - 세션의 유지시간을 초로 반환.
+      setMaxInactiveInterval(t)
+        - 세션의 유효시간을 t에 설정된 초 값으로 설정.
+        
+        setAttribute("k1","홍길동");
+        setAttribute("k2","길라임");
+        setAttribute("k3","김주원");
+        
+        removeAttribute("k1");  ----> k1키만 삭제
+        
+      invalidate() ★   ---> 세션이 해제(모든키가 삭제)
+        - 현재 세션을 종료.
+        - 로그아웃에서 사용.
+        
+      getAttribute(key)
+        - 문자열 key로 설정된 세션 값을 Object형태로 반환.
+      setAttribute(key, value)
+        - 문자열 key으로 Object value을 설정.   
+        
+     		
+       
+    
+  5. application(javax.servlet.ServletContext)
+    - 웹서버의 애플리케이션 처리와 관련된 정보를 참조하기 위해 사용.
+    
+    개발자를 위한 서버정보)
+      getServerInfo()
+        - JSP/서블릿 컨테이너의 이름과 버전을 리턴
+      getMajorVersion()
+        - 컨테이너가 지원하는 서블릿 API의 Major버전정보 리턴
+      getMinorVersion()
+        - 컨테이너가 지원하는 서블릿 API의 Minor버전정보 리턴
+    
+    서버자원정보)
+      getMimeType(filename)
+        - 지정된 파일에 대한 MIME Type을 리턴
+      getResource(path)
+        - path에 지정된 자원을 URL객체로 리턴
+      getResourceAsStream(path)
+        - path에 지정된 자원을 InputStream객체로 리턴
+      getRealPath(path)
+        - path에 지정된 자원의 파일시스템의 실제 경로 리턴
+      getContext(path)
+        - path에 지정된 자원의 컨텍스트 정보를 리턴
+      getRequestDispatcher(path)
+        - path에 지정된 자원을 위한 request dispatcher를 생성
+        
+    로그관련정보)
+      log(message)
+        - 문자열 message의 내용을 로그 파일에 기록.
+      log(message, exception)
+        - 예외상황에 대한 정보를 포함하여 로그 파일에 기록.
+     
+    
+    
+  6. out(javax.servlet.jsp.JspWriter)
+    - 사용자에게 전달하기 위한 output스트림을 처리.
+    - 브라우저 출력객체
+    
+    주요메소드)
+    getBufferSize()
+      - 출력버퍼의 크기를 byte로 알려준다.
+    getRemaining()
+      - 남아있는 버퍼의 크기 중 사용 가능한 비율을 알려준다.
+    clearBuffer()
+      - 버퍼에 있는 컨텐츠를 모두 지운다.
+    flush()
+      - 버퍼를 비우고 output stream도 비운다.
+    close()
+      - output stream을 닫고 버퍼를 비운다.
+    println(content)
+      - content내용을 newline과 함께 출력
+    print(content)
+      - content내용을 출력
+    
+    
+  7. config(javax.servlet.ServletConfig)
+    - 현재 JSP에 대한 초기화 환경을 처리하기 위해 사용.
+  8. page(java.lang.Object)
+    - 현재 JSP페이지에 대한 클래스정보.
+  9. exception(java.lang.Throwable)
+    - 예외 처리를 위해 사용.  
+    
+====================================================================
+<JSP페이지간의 이동> ★
+1. redirect (새로운 페이지로 이동)
+   HttpServletResponse response
+       -----> sendRedirect("이동할 페이지경로");
+
+2. forwoard (request,response를 공유하는 페이지 이동)
+   HttpServletRequest request
+       -----> getRequestDispatcher("이동할 페이지경로")
+       
+   RequestDispatcher dispatcher
+       -----> forwoard(req,resp);
+
+====================================================================
+<JSP 영역(scope)객체> ★★ ---> 데이터 공유의 범위
+
+1. pageContext(PageContext)
+   - 현재페이지내에서 데이터 공유
+   
+2. request(HttpServletRequest)
+   - 요청페이지간의 데이터 공유
+   
+3. session(HttpSession)
+   - 동일브라우저(동일세션)내에서 데이터 공유
+   
+4. application(ServletContext)
+   - 동일서버의 동일Context(TomTest)내에서 데이터 공유
+   
+공통 메소드)
+   setAttribute(String key, Object value); //value는 저장할 데이터를 의미.
+     - 데이터 저장
+   getAttribute(String key);
+     - 데이터 조회(검색)
+   removeAttribute(String key);
+     - 데이터 삭제
