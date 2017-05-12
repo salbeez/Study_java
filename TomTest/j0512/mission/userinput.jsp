@@ -4,6 +4,7 @@
 	function idCheck() {
 		var setting = 'width=240, height=70, menubar=no, status=no, toolbar=no, location=no,resizable=no';
 		window.open('duple.jsp', 'window팝업', setting);
+
 	}
 </script>
 <html>
@@ -77,15 +78,27 @@
 							<%
 								String jobs[] = { "==선택==", "학생", "공무원", "언론/출판", "군인/경찰", "일반사무직", "영업직", "기술/전문직", "보건/의료", "자영업", "주부",
 										"기타" };
+								for (int i = 0; i < jobs.length; i++) {
+							%>
+							<option><%=jobs[i]%></option>
+							<%
+								}
 							%>
 					</select></td>
 				</tr>
 				<tr align="center">
-					<td colspan="4"><input type="button" value="등록"> <input
+					<td colspan="4"><input type="submit" value="등록"> <input
 						type="reset" value="취소"></td>
 				</tr>
 			</table>
 		</form>
 	</center>
 </body>
+<script type="text/javascript">
+function aaa(){
+	var job =  document.;
+	alert(job);
+}
+</script>
+
 </html>
