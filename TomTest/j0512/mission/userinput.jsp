@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript">
 	function idCheck() {
 		var setting = 'width=240, height=70, menubar=no, status=no, toolbar=no, location=no,resizable=no';
@@ -55,7 +56,11 @@
 					<td width="100" bgcolor="#ffcccc">생년월일</td>
 					<td colspan="3"><input type="text" name="year" size="4"
 						maxlength="4">년 <select name="month">
+							<c:forEach var="i" begin="1" end="12">
+								<option>${i }</option>
+							</c:forEach>
 					</select>월 <select name="day">
+							<%-- --%>
 					</select>일</td>
 				</tr>
 				<tr>
@@ -76,8 +81,8 @@
 					<td width="100" bgcolor="#ffcccc">직업<font color="red">*</font></td>
 					<td colspan="3"><select name="job">
 							<%
-								String jobs[] = { "==선택==", "학생", "공무원", "언론/출판", "군인/경찰", "일반사무직", "영업직", "기술/전문직", "보건/의료", "자영업", "주부",
-										"기타" };
+								String jobs[] = {"==선택==", "학생", "공무원", "언론/출판", "군인/경찰", "일반사무직", "영업직", "기술/전문직", "보건/의료", "자영업", "주부",
+										"기타"};
 								for (int i = 0; i < jobs.length; i++) {
 							%>
 							<option><%=jobs[i]%></option>
