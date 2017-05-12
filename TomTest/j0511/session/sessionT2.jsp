@@ -35,7 +35,7 @@
 <%!//DB대신에 hashMap으로 검사 여기에 소스 추가>>> 나중에는 db로 변경
 	HashMap<String, String> map = new HashMap<>();%>
 <%
-/* 	map.put("qwe", "123");
+	map.put("qwe", "123");
 
 	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
@@ -53,10 +53,8 @@
 		}
 	} else {
 		response.sendRedirect("sessionT1.jsp");
-	} */
-	
-	DAO_2 dao = new DAO_2();
-	
+	}
+
 	//저장	map.put("id","pw" )
 %>
 <body>

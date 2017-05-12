@@ -9,6 +9,7 @@
 	<classpathentry kind="src" path="WEB-INF/src"/>
 	<classpathentry exported="true" kind="lib" path="C:/Util/apache-tomcat-8.5.14/lib/tomcat-dbcp.jar"/>
 	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="src" output="work" path="work"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>
