@@ -9,6 +9,67 @@
      function idCheck(){
     	window.open('confirmid.jsp','confirm','width=300,height=150');
      }
+     function validCheck(){
+      //빈값체크, 숫자체크, 문자열조합
+        /* var id = document.frm.id.value;
+        var pass = document.frm.pass.value; */
+        
+        var jumin1Exp = new RegExp("^[\\d]{6}$","g");
+        var jumin2Exp = /^[\d]{7}$/g;        
+        var yearExp = /^[\d]{4}$/g;        
+        var zipExp = /^[\d]{3}-[\d]{3}$/g;        
+        var emailExp = /^[a-zA-Z0-9]{6,15}@[a-zA-Z]+\.[a-zA-Z]+$/g;
+        
+        var f = document.frm;//f: <form>엘리먼트
+        var id = f.id.value;
+        
+        if(id==''){
+        	alert('아이디를 입력!!');
+        	f.id.focus();
+        }else if(id.length < 6 || id.length > 12){
+           	alert('아이디는 6~12자리!!');
+           	f.id.focus();
+        }else if(f.pass.value == ''){//데이터내용 비교
+        	alert('비번입력!!');
+        	f.pass.focus();
+        }else if(f.pass2.value === ''){//자료형 비교후 내용 비교
+        	alert('비번입력!!');
+        	f.pass2.focus();
+        }else if(f.pass.value!=f.pass2.value){
+            alert('비번이 일치하지 않습니다!!');
+            f.pass.value=''; f.pass2.value='';
+            f.pass.focus();
+        }else if(f.name.value==''){
+        	alert('이름입력!!');
+        	f.name.focus();
+        }else if(!jumin1Exp.test(f.jumin1.value) ||
+        		 !jumin2Exp.test(f.jumin2.value)){
+        	alert('잘못된 주민번호입니다!!');
+        	f.jumin1.value='';
+        	f.jumin2.value='';
+        	f.jumin1.focus();
+        }else if( !yearExp.test(f.year.value)){
+        	alert('생년에 4자리 수를 입력!!');
+        	f.year.value='';
+        	f.year.focus();
+        }else if(zipExp.test(f.zip1.value+"-"+f.zip2.value)){
+        	alert('잘못된 우편번호입니다!!');
+        	f.zip1.value='';
+        	f.zip2.value='';
+        	f.zip1.focus();
+        }else if(!emailExp.test(f.email.value)){
+        	alert('유효하지 않은 이메일형식입니다!!');
+        	f.email.value='';
+        	f.email.focus();
+        }else if(f.job.value=='==선택=='){
+        	alert('직업을 선택!!');
+        	f.job.focus();
+        }else{
+        	//폼내에 유효한 데이터가 입력 되었다면
+        	f.submit();//<form>태그내의 action속성의 URL로 폼데이터 전송!!
+        }
+        
+     }//validCheck
   </script> 
 </head>
 <%-- userinput.jsp --%>
@@ -111,7 +172,7 @@
       </tr>
       <tr align="center">
          <td colspan="4">
-           <input type="submit" value="등록" >
+           <input type="button" value="등록" onclick="validCheck()">
            <input type="reset" value="취소">
          </td>
       </tr>

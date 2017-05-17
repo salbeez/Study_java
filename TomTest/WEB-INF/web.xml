@@ -43,6 +43,11 @@
 		<servlet-name>contr</servlet-name><!-- 이름 통일 -->
 		<servlet-class>com.kosta.t0512.Contr</servlet-class>
 	</servlet>
+
+	<servlet>
+		<servlet-name>empC</servlet-name><!-- 이름 통일 -->
+		<servlet-class>com.kosta.t0516.control.EmpController</servlet-class>
+	</servlet>
 	<!-- ================================================== -->
 	<!-- 가상의 경로 정의(url-pattern) -->
 	<servlet-mapping>
@@ -73,6 +78,11 @@
 	<servlet-mapping>
 		<servlet-name>emp</servlet-name><!-- 이름 통일 -->
 		<url-pattern>/emp</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>empC</servlet-name><!-- 이름 통일 -->
+		<url-pattern>/empC</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
