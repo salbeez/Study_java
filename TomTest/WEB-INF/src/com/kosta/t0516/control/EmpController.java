@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kosta.t0516.EmpDAO2;
+import com.kosta.t0516.EmpDAO3;
 import com.kosta.t0516.dto.Emp;
 
 public class EmpController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		EmpDAO2 dao = new EmpDAO2();
+		EmpDAO3 dao = new EmpDAO3();
 		List<Emp> list = dao.selectAll();
 
 		// 데이터 공유 뷰(JSP) request, session으로;
@@ -23,6 +24,6 @@ public class EmpController extends HttpServlet {
 		req.setAttribute("list", list);
 
 		// req.getRequestDispatcher("/j0516/emp5.jsp").forward(req, res);
-		req.getRequestDispatcher("/j0516/emp6.jsp").forward(req, res);
+		req.getRequestDispatcher("/j0517/emp7.jsp").forward(req, res);
 	}
 }

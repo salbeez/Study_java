@@ -16,7 +16,7 @@ public class MySqlMapClient {
 	private static final SqlMapClient sqlMap;
 	static {
 		try {
-			String resource = "./iba/sqlMapConfig.xml";
+			String resource = "./iba/conf/sqlMapConfig.xml";
 			Reader reader = Resources.getResourceAsReader(resource);
 			sqlMap = SqlMapClientBuilder.buildSqlMapClient(reader);
 		} catch (IOException e) {
