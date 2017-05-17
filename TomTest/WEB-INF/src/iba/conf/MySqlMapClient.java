@@ -1,4 +1,4 @@
-package iba;
+package iba.conf;
 
 import java.io.IOException;
 import java.io.Reader;

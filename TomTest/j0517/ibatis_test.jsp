@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h3><b>Ibatis_FrameWork (SQL MAP 프레임 워크) 테스트</b></h3>
 </body>
 </html>
