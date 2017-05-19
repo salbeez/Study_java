@@ -1,0 +1,21 @@
+------WebKitFormBoundaryzZm2wZHlQQS5N8IB
+Content-Disposition: form-data; name="name"
+
+ㅁㅁㅁㅁ
+------WebKitFormBoundaryzZm2wZHlQQS5N8IB
+Content-Disposition: form-data; name="myFile"; filename="팀과제.txt"
+Content-Type: text/plain
+
+
+
+
+1.ArrayList
+
+2.LinkedList
+
+3.HashMap
+
+4.HashSet
+
+5.Properties
+------WebKitFormBoundaryzZm2wZHlQQS5N8IB--
