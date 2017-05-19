@@ -1,0 +1,58 @@
+
+
+
+
+
+drop table test;
+drop sequence test_seq;
+
+create table test(
+    no number,
+    a number,
+    b number,
+    c number
+);
+
+create sequence test_seq;
+
+create or replace trigger test_tri
+  after insert on test
+  for each row
+  begin
+     update test set c= :new.a * :new.b where no= :new.no;
+  end;
+/ 
+
+insert into test (no,a,b) values (test_seq.nextval,10,2);
+
+===>에러: 이벤트발생한 테이블에 대해서는 DML작업을 할 수 없다!!
+
+
+table test
+   a    b    c
+   10   2   20
+============================================================
+
+create or replace procedure test_pro(su1 number,su2 number)
+ is
+   -- 변수선언
+   seqNo number;
+ begin
+   -- 프로시저내용(변수초기화, 함수호출, SQL문, 조건문, 반복문) 
+   no := test_seq.nextval;   
+   insert into test (no,a,b) values (no, su1, su2);   
+   update test set c= su1*su2  where no=no;
+ end;
+ /
+
+exec test_pro(10,2);
+
+
+
+
+
+
+
+
+
+
