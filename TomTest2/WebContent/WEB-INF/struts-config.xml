@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--
     Licensed to the Apache Software Foundation (ASF) under one or more
     contributor license agreements.  See the NOTICE file distributed with
@@ -92,7 +92,20 @@
         <action
             path="/Welcome"
             forward="/pages/Welcome.jsp"/>
-
+            <!-- 단순 jsp 포워드 
+            path = jsp 페이지에 매핑될 가상의 경로
+            forward =  
+            /
+            ./
+            ../
+            -->
+        <action path="/hello" forward="/hello.jsp"></action>
+		
+		<!-- Action클래스를 실행후 jsp 포워딩 -->
+		<action path="/emp" type="com.kosta.t0519.MyAction">
+			<forward name="success" path="/0519/emp6.jsp"></forward>
+		</action>
+		
     <!-- sample input and input submit actions
 
         <action

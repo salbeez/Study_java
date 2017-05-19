@@ -1,0 +1,6 @@
+1. lib 추가 및 add to bl!~~~
+2. controller 작성 -> web.xml에서 <action> 태그 사용 
+<action path="임의 경로로 들어갈곳 " type="컨트롤러 경로" forword="뷰 경로">
+<forword path="임의 경로" name="컨트롤러에서 받을 String 문자값">
+
+/TomTest2/~~~.do
