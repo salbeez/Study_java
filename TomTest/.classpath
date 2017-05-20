@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/jasper.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/el-api.jar"/>
 	<classpathentry kind="var" path="TOMCAT_HOME/lib/annotations-api.jar"/>
 	<classpathentry kind="src" path="WEB-INF/src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/ji/Desktop/apache-tomcat-8.5.14/lib/tomcat-dbcp.jar"/>
 	<classpathentry exported="true" kind="lib" path="WEB-INF/lib/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="WEB-INF/lib/postgresql-42.0.0.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Util/apache-tomcat-8.5.14/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/ibatis-2.3.4.726.jar"/>
+	<classpathentry kind="lib" path="WEB-INF/lib/cos.jar"/>
+>>>>>>> branch 'master' of https://github.com/salbeez/Study_java.git
 	<classpathentry kind="src" output="work" path="work"/>
 	<classpathentry kind="output" path="WEB-INF/classes"/>
 </classpath>

@@ -28,4 +28,9 @@ public class DTO_2 {
 		this.pw = pw;
 	}
 
+	@Override
+	public String toString() {
+		return "DTO_2 [id=" + id + ", pw=" + pw + "]";
+	}
+
 }
