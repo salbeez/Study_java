@@ -31,6 +31,8 @@
 	<form-beans>
 		<!-- 유효성 검사를 위한 ActionForm등록 -->
 		<form-bean name="loginForm" type="com.kosta.s0522.forms.LoginActionForm"></form-bean>
+		
+		<form-bean name="calcForm" type="com.kosta.s0523.forms.CalcActionForm"></form-bean>
 		<!-- sample form bean descriptor for an ActionForm <form-bean name="inputForm" 
 			type="app.InputForm"/> end sample -->
 
@@ -95,7 +97,23 @@
 			input="/0522/loginForm2.jsp">
 			<forward name="success" path="/0522/loginForm2.jsp" redirect="true"></forward>
 			</action>
-
+			
+			<!-- 계산기 -->
+		<action path="/calc" forward="/calc/calc_form.jsp"></action>
+		
+		<action path="/clac/clac" type="com.kosta.s0523.action.CalcAction" 
+		name="calcForm" 
+		scope="request"
+		validate="true"
+		input="/clac/calc_form.jsp">
+		<forward name="success" path="/calc/calc_result.jsp"></forward>
+		</action>
+		
+		<!-- 타일즈 액션 -->
+		<action path="/tiles/main" forward=".main"></action>
+		<action path="/tiles/menu1" forward=".menu1"></action>
+		<action path="/tiles/menu2" forward=".menu2"></action>
+		 
 		<!-- sample input and input submit actions <action path="/Input" type="org.apache.struts.actions.ForwardAction" 
 			parameter="/pages/Input.jsp"/> <action path="/InputSubmit" type="app.InputAction" 
 			name="inputForm" scope="request" validate="true" input="/pages/Input.jsp"/> 
@@ -103,7 +121,7 @@
 			validate="true" input="/pages/Edit{1}.jsp"/> end samples -->
 	</action-mappings>
 
-
+<controller processorClass="com.kosta.control.MyRequestProcessor"></controller>
 	<!-- ======================================== Message Resources Definitions -->
 
 	<message-resources parameter="resources.application" /><!-- 
@@ -113,6 +131,8 @@
 	<!-- =============================================== Plug Ins Configuration -->
 
 	<!-- ======================================================= Tiles plugin -->
+	
+
 	<!-- This plugin initialize Tiles definition factory. This later can takes 
 		some parameters explained here after. The plugin first read parameters from 
 		web.xml, thenoverload them with parameters defined here. All parameters are 
@@ -142,6 +162,12 @@
 			value="/org/apache/struts/validator/validator-rules.xml,
                /WEB-INF/validation.xml" />
 	</plug-in>
-
+	
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/config/tiles-defs.xml"/>
+		<set-property property="definitions-debug" value="2"/>
+		<set-property property="definitions-parser-details" value="2"/>
+		<set-property property="definitions-parser-validate" value="true"/>
+	</plug-in>
 </struts-config>
 

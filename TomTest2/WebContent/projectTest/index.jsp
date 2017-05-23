@@ -9,16 +9,29 @@
 <link rel="stylesheet" type="text/css" href="basic.css">
 <title>Insert title here</title>
 </head>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#page1").click(function(){
+			$("#content").load("a.jsp");
+		});
+		$("#login").click(function(){
+			$("#content").load("./sign/userconfirm.jsp");
+		});
+		$("#home").click(function(){
+			$("#sidebar").load("./home/home_side.html");
+			$().ajax
+		});
+		$("#intro").click(function(){
+			$("#content").load("./home/intro_contents.jsp");
+		});
+	});
+</script>
 <body>
 	<div id="header">aaa</div>
 	<div id="header2"><jsp:include page="top.jsp" flush="true"></jsp:include>
 	</div>
 	<div id="sidebar">side</div>
-	<div id="content">
-		${sub }<br>
-		<c:if test="${sub != null}">하하
-			<jsp:include page="${sub }.jsp"></jsp:include>
-		</c:if>
-	</div>
+	<div id="content"></div>
 </body>
 </html>

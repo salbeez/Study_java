@@ -1,5 +1,7 @@
 package com.kosta.s0522.forms;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
@@ -29,6 +31,16 @@ public class LoginActionForm extends ActionForm {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+
+/*	@Override
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+		//선행작업(validate,setter메소드 전)
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}*/
 
 	// 2. 유효성 검사 validate메소드 오버라이딩
 	@Override

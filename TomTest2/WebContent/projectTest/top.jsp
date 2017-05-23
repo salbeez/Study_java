@@ -24,37 +24,27 @@ li a {
 	text-decoration: none;
 }
 
-li
- 
-a
-:hover
-:not
- 
-(
-.active
- 
-){
-background-color
-:
- 
-#111
-;
-
-
+li a :hover:not (.active ){
+	background-color: #111;
 }
+
 .active {
 	background-color: #4CAF50;
 }
 </style>
 </head>
 <body>
-		<ul>
-			<li style="float: left"><a class="active" href="#about">Happy
-					Cafe</a></li>
-			<li><a href="#home">제품</a></li>
-			<li><a href="../test?sub=a">매장 찾기</a></li>
-			<li><a href="#contact">매장 관리</a></li>
-			<li><a href="#contact">게시판</a></li>
-		</ul>
+	<ul style="float: right">
+		<li><a href="#login" id="login">로그인</a></li>
+		<li><a href="#signUp" id="signUp">회원가입</a></li>
+	</ul>
+	<ul>
+		<li style="float: left"><a class="active" href="#about" id="home">Happy
+				Cafe</a></li>
+		<li><a href="#home" id="page1">제품</a></li>
+		<li><a href="#st" id="page2">매장 찾기</a></li>
+		<li><a href="#contact" id="page3">매장 관리</a></li>
+		<li><a href="#contact" id="page4">게시판</a></li>
+	</ul>
 </body>
 </html>
