@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>연관 시도,구군,동 출력</title>
+<script type="text/javascript" src="../js/ajax2.js"></script>
+<script type="text/javascript">
+     function requestSido(){//요청
+    	new ajax.xhr.Request('zip_result.jsp?action=sido',null,resultSido,'GET');
+     }
+     function resultSido(xhr){//콜백
+        if(xhr.readyState==4 && xhr.status==200){
+        	var str = xhr.responseText;//str="<option>서울</option><option>제주</option>"
+            var sido=document.getElementById('sido');
+        	sido.innerHTML=str;
+        }
+     }
+     //-----------------------------------------------------------
+     function requestGugun(){//요청
+    	var sido = document.getElementById('sido').value;
+    	var params="action=gugun&sido="+sido;     	 
+    	new ajax.xhr.Request('zip_result.jsp',params,resultGugun,'POST');
+     }
+     function resultGugun(xhr){//콜백
+        if(xhr.readyState==4 && xhr.status==200){
+        	var str = xhr.responseText;//str="<option>서울</option><option>제주</option>"
+            var gugun=document.getElementById('gugun');
+        	gugun.innerHTML=str;
+        }
+     }
+   //-----------------------------------------------------------
+      function requestDong(){//요청
+    	var gugun = document.getElementById('gugun').value;
+    	var params="action=dong&gugun="+gugun;     	 
+    	new ajax.xhr.Request('zip_result.jsp',params,resultDong,'POST');
+     }
+     function resultDong(xhr){//콜백
+        if(xhr.readyState==4 && xhr.status==200){
+        	var str = xhr.responseText;//str="<option>서울</option><option>제주</option>"
+            var dong=document.getElementById('dong');
+            dong.innerHTML=str;
+        }
+     }
+     
+     
+     window.onload=function(){
+    	 requestSido();
+     }
+  </script>
+</head>
+<!-- select_test.html -->
+<body>
+	<h3>연관 시도,구군,동 출력</h3>
+	<hr>
+	<select name="sido" id="sido" onchange="requestGugun()">
+		<option>==선택==</option>
+	</select>
+	<select name="gugun" id="gugun" onchange="requestDong()">
+		<option>==선택==</option>
+	</select>
+	<select name="dong" id="dong">
+		<option>==선택==</option>
+	</select>
+
+</body>
+</html>

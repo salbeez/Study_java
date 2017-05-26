@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+
+	var xhr; //XmlHttpReaquest객체()
+
+
+	function setXmlHttpRequest() { //데이터 요청(URL 요청)
+		if (window.ActiveXObject) {
+			try {
+				alert('당싱의 브라우저는 IE입니다')
+				xhr = new ActiveXObject("Msxml2.XMLHTTP"); //IE경우 5이상 경우
+			} catch (e) {
+				alert('당싱의 브라우저는 IE5 미만입니다')
+				xhr = new ActiveXObject("Microsoft.XMLHTTP"); //IE 5미만경우
+			}
+		} else if (window.XMLHttpRequest) { //IE
+			alert('당싱의 브라우저 IE 이상 &  IE를 제외한 브라우저 입니다')
+			xhr = new XMLHttpRequest(); //비 IE경우
+		} else {
+			xhr = null;
+		}
+	}
+
+	function load() { //데이터 요청(URL 요청)
+		setXmlHttpRequest();
+		xhr.onreadystatechange = loaded;
+		//	xhr.open('http요청 방식', url, 비동기)
+		xhr.open('GET', 'simple.jsp', true);
+		//xhr.send('서버에게 보낼 데이터') ex) xhr.send('id=gildong&pass=123');
+		//xhr.send(null);
+	}
+	
+	function loaded(){
+		if(xhr.readyState==4 && xhr.status==200){//전체데이터를 받았다면
+			alert('서버의 상태 : '+xhr.status);
+		alert('loaded : '+xhr.readyState);
+		//데이터 받기 2가지
+		//text로 받기 responseText
+		//xml로 받기 responseXML
+		
+		var str = xhr.responseText;
+		alert(str);
+		document.getElementById("d1").innerHTML=str;
+		}
+	}
+</script>
+<body>
+	<h1>요청 페이지</h1>
+	<input type="button" value="서버데이터 요청" onclick="load()">
+	<div id="d1"></div>
+</body>
+</html>

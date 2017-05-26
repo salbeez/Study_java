@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript">
+	function pageRequest() { //데이터를 출력하는 페이지 요청
+		sendRequest('simple.jsp', null, responseProcess);
+	}
+	function responseProcess() { //요청 후 실행할 콜백함수
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var str = xhr.responseText; //데이터 얻기
+			alert(str);
+		}
+	}
+	//=================
+	function pageRequest2() {
+		var name = '나길동';
+		//	sendRequest('hello.jsp', 'name=' + encodeURIComponent(name), responseProcess2, 'GET');
+		sendRequest('hello.jsp', 'name=' + name, responseProcess2, 'POST'); //post일때는 encodeURIComponent을 쓸 필요가 없다
+	}
+	function responseProcess2() {
+		if (xhr.readyState == 4) { //요청 후 데이터를 완전히 받았을때
+			if (xhr.status == 200) {
+				//응답한 데이터 값 얻어오기
+				var str = xhr.responseText;
+				document.getElementById("sp").innerHTML = str;
+			} else {
+				alert('서버 에러 : ' + xhr.status)
+			}
+		}
+	}
+	function getTime() {
+		var d = new Date();
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var s = d.getSeconds();
+		var currTime = '<font color=blue>' + h + '시 ' + m + '분 ' + s + '초</font>';
+		document.getElementById("d1").innerHTML = currTime;
+
+		setTimeout('getTime()', 1000);
+	}
+
+	function loadNews() {
+		sendRequest('news.jsp', '', loadedNews, 'GET')
+	}
+	function loadedNews() { //콜백하면서 뉴스타이틀을 화면에 출력
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var str = xhr.responseText;
+			document.getElementById("d2").innerHTML = str;
+		}
+	}
+	//window.onload = window(브라우저)에 HTML코드가 전체 출력되었을 때 할 일을 기술
+	//자바 스크립트에서는 function을 객체 취급 해서 new function을 할수 있다
+	//window.onload = function(){할일};
+	window.onload = function(){
+		loadNews();
+	}
+</script>
+<body>
+	<h3>Ajax 테스트</h3>
+	<hr>
+	<button onclick="pageRequest()">전송(simple.jsp)</button>
+	<button onclick="pageRequest2()">전송(hello.jsp)</button>
+	<button onclick="getTime()">시계</button>
+
+	<span id="sp"> </span>
+	<div id="d1"></div>
+
+	<hr>
+	<h3>최신뉴스</h3>
+	<div id="d2"></div>
+</body>
+</html>

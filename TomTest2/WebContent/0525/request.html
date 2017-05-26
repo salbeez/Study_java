@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript">
+	function load() { //요청
+		sendRequest('response1.jsp', '', loaded, 'GET');
+	}
+	function loaded() { //콜백
+		//데이터요청한 후 할일
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var str = xhr.responseText; //str: String ==> "Hello,Ajax~!!"
+			var arr = str.split(","); //arr: String[]
+
+			var html = '<ul>';
+			for (var i = 0; i < arr.length; i++) {
+				html += '<li>' + arr[i] + '</li>';
+			}
+			html += '</ul>';
+
+
+			var d1 = document.getElementById('d1'); //d1: Element
+			//d1.innerHTML=str;
+			d1.innerHTML = html;
+		}
+	}
+	//----------------------------------------------
+	function load2() { //요청
+		var name = document.getElementById('username');
+		//alert(name.value);
+		sendRequest('response2.jsp', 'username=' + name.value, loaded2, 'POST');
+	}
+	function loaded2() { //콜백
+		//데이터요청한 후 할일
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var str = xhr.responseText; //str: String ==> "Hello,Ajax~!!" 
+			var d1 = document.getElementById('d1'); //d1: Element
+			d1.innerHTML = str;
+		}
+	}
+	//----------------------------------------------
+	function load3() { //요청
+		var name = document.getElementById('username');
+		//alert(name.value);
+		sendRequest('response3.jsp', 'username=' + name.value, loaded3, 'POST');
+	}
+	function loaded3() { //콜백
+		//데이터요청한 후 할일
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var str = xhr.responseText; //str: String ==> "Hello,Ajax~!!" 
+			var d1 = document.getElementById('d1'); //d1: Element
+			//d1.innerHTML=str;     //오는 모든 문자열 중에 HTML태그를 인식       
+			d1.innerText = str; //그런거 없고 전부 문자열
+		}
+	}
+	//----------------------------------------------
+	function load4() { //요청
+		sendRequest('response4.jsp', 'username=' + name.value, loaded4, 'GET');
+	}
+	function loaded4() { //콜백
+		//데이터요청한 후 할일
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var doc = xhr.responseXML; //xml 요청이니 이것도 xml 으로
+			var root = doc.documentElement;
+			alert(root.tagName);
+
+			//책 제목 얻기
+			var titleList = doc.getElementsByTagName("title");
+			//alert(titleList.item(0).textContent);
+			var htmlTxt = '<ol>';
+			for (var i = 0; i < titleList.length; i++) {
+				htmlTxt += "<li>" + titleList.item(i).textContent + "</li>";
+			}
+			htmlTxt += '</ol>';
+
+			var d1 = document.getElementById('d1'); //d1: Element
+			d1.innerHTML = htmlTxt;
+		}
+	}
+
+	//----------------------------------------------
+	function load5() { //요청
+		var name = document.getElementById('username');
+		//alert(name.value);
+		sendRequest('response5.jsp', 'username=' + name.value, loaded5, 'GET');
+	}
+	function loaded5() { //콜백
+		//데이터요청한 후 할일
+		if (xhr.readyState == 4 && xhr.status == 200) {
+/*			var str = xhr.responseText;
+			str.name-->  에러
+			var v = {name:"홍길동"}
+			v.name ---->홍길동 
+*/
+			var person =  eval("("+xhr.responseText+")");
+					//eval ->형식을 갖는 텍스트를 js obj로 변환
+					
+			var htmlTxt = '이름 :'+person.name+' 나이 : '+person.age+' 직업 : '+person.job;		
+			var d1 = document.getElementById('d1'); //d1: Element
+			d1.innerHTML = htmlTxt;
+		}
+	}
+	
+	//----------------------------------------------
+	function load6() { //요청
+		sendRequest('response6.jsp', null, loaded6, 'GET');
+	}
+	function loaded6() { //콜백
+		//데이터요청한 후 할일
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var arrBooks =  eval(xhr.responseText);
+					//eval ->형식을 갖는 텍스트를 js obj로 변환
+			alert('책 갯수 : '+arrBooks.length)
+			var htmlTxt = '<font color=red> <ul>';
+			for(var i=0; i<arrBooks.length;i++){
+				htmlTxt +=	'<li>'+arrBooks[i].title+'</li>'
+			}
+			htmlTxt +='</ul></font>'
+			
+			var d1 = document.getElementById('d1'); //d1: Element
+			d1.innerHTML = htmlTxt;
+		}
+	}
+	//미션 7클릭시 div 태그에 전체 사원명을 목록으로 출력하기
+	function load7() { //요청
+		sendRequest('/TomTest2/aaaaa', null, loaded7, 'GET');
+	}
+	function loaded7() { //콜백
+		//데이터요청한 후 할일
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var arrPersons =  eval(xhr.responseText);
+					//eval ->형식을 갖는 텍스트를 js obj로 변환
+			alert('검색 결과 : '+arrPersons.length)
+			var htmlTxt = '<font color=red> <ul>';
+			for(var i=0; i<arrPersons.length;i++){
+				htmlTxt +=	'<li>'+arrPersons[i].title+'</li>'
+			}
+			htmlTxt +='</ul></font>'
+			
+			var d1 = document.getElementById('d1'); //d1: Element
+			d1.innerHTML = htmlTxt;
+		}
+	}
+	//미션2 8클릭시 특정 부서의 사원정보를 테이블로 출력하기
+		function load8() { //요청
+		var emp="8";
+		sendRequest('/TomTest2/aaaaa', 'emp='+emp, loaded8, 'POST');
+	}
+	function loaded8() { //콜백
+		//데이터요청한 후 할일
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var arrPersons =  eval(xhr.responseText);
+					//eval ->형식을 갖는 텍스트를 js obj로 변환
+			alert('검색 결과 : '+arrPersons.length)
+			var htmlTxt = '<font color=red> <table border=1 cellpadding=5>';
+			for(var i=0; i<arrPersons.length;i++){
+				htmlTxt +=	'<tr><td>'+arrPersons[i].empno+'</td><td>'+arrPersons[i].ename+'</td><td>'+arrPersons[i].hiredate+'</td></tr>'
+			}
+			htmlTxt +='</table></font>'
+			
+			var d1 = document.getElementById('d1'); //d1: Element
+			d1.innerHTML = htmlTxt;
+		}
+	}
+	
+	$(document).
+</script>
+</head>
+<!-- request.html(요청페이지-서버에게 데이터를 URL로 요청, xhr객체를 이용해서 요청) -->
+<body>
+	이름:
+	<input type="text" name="username" id="username">
+	<br>
+	<button onclick="load()">response요청(HTMLtext)</button>
+	<button onclick="load2()">response2요청(HTMLtext)</button>
+	<button onclick="load3()">response3요청(text)</button>
+	<button onclick="load4()">response4요청(xml)</button>
+	<button onclick="load5()">response5요청(JSON)</button>
+	<button onclick="load6()">response6요청(JSON)</button>
+	<button onclick="load7()">response6요청(사원정보 이름)</button>
+	<button onclick="load8()">response6요청(사원정보 사번,이름,입사일)</button>
+	<!-- xml -->
+	<h3>결과출력</h3>
+	<hr>
+	<div id="d1"></div>
+</body>
+</html>
+
+
+
+
+

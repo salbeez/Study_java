@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="../js/member.js"></script>
+
+
+<body>
+
+	<h3>자바 스크립트 객체 테스트</h3>
+	<script>
+		var m = new Member("나길동","13","학생");
+		document.write("이름 : "+m.name);
+		document.write("<br>m.toString()"+m.toString());
+		document.write("<br>m"+m);
+		
+		m.setName("길라임");
+		m.setAge(21);
+		m.setJob("스턴트 우먼");
+		
+		document.write("<br>내용 변경 후 member :"+m);
+	</script>
+
+
+</body>
+</html>
