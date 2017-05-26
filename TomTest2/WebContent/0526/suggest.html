@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>제시어 요청페이지</title>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript">
+	var checkFirst = false; //시작확인
+	var loopSendKeyword = false; //반복제어
+	var lastKeyword = '';
+
+	function startSuggest() {
+		if (!checkFirst) { //처음 키보드 입력시
+			setTimeout('sendKeyword()', 500);
+			loopSendKeyword = true; //반복적인 실행(서버요청)이 시작
+		}
+		checkFirst = true;
+	} //startSuggest
+
+	function sendKeyword() { //URL요청 (서버에게 keyword전달)
+		if (!loopSendKeyword) {
+			return;
+		}
+		var keyword = document.search.keyword.value;
+
+		if (keyword != '') {
+			lastKeyword = keyword;
+			var params = 'keyword=' + keyword; //전달파라미터  'keyword=자바' 
+			sendRequest('suggest.jsp', params, displayResult, 'POST');
+		} else {
+			hide('suggest');
+		}
+
+		setTimeout('sendKeyword()', 500);
+	} //sendKeyword
+
+	function displayResult() { //콜백함수
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			//응답데이터 얻어오기!!  xhr.responseText 또는 xhr.responseXML
+			var result = xhr.responseText.split('|'); //"2|자바,자바라".split('|');
+			//result = ["2","자바,자바라"];
+			var count = parseInt(result[0]); //"2" ---> 2
+			if (count > 0) { //결과 데이터가 있다면
+				var keywordList = result[1].split(",");
+				//keywordList = ["자바","자바라"];
+
+				var htmlTxt = '';
+				for (var i = 0; i < keywordList.length; i++) {
+					htmlTxt += "<a href=\"javascript.select('" + keywordList[i] + "')\">" + keywordList[i] + '</a><br>';
+				}
+
+				var suggestList = document.getElementById('suggestList');
+				suggestList.innerHTML = htmlTxt;
+				show('suggest');
+			} else {
+				hide('suggest');
+			}
+		}
+	} //displayResult
+	function select() { //제시어를 선택(클릭)했을때 해당 제시어를 텍스트 필드에게 전달
+		document.search.keyword.value = keyword;
+		hide('suggest');
+		//제시어 기능을 초기화
+		checkFirst = false;
+		loopSendKeyword = false;
+	} //select
+	function show(elementid) {
+		var ele = document.getElementById(elementid);
+		ele.style.display = '';
+	}
+	function hide(elementid) {
+		var ele = document.getElementById(elementid);
+		ele.style.display = 'none';
+	}
+</script>
+</head>
+<!-- suggest.html (제시어 요청) -->
+<body>
+	<form name="search">
+		<input type="text" name="keyword" onkeydown="startSuggest()">
+		<input type="button" value="검색">
+	</form>
+	<div id="suggest"
+		style="display:; position: absolute; left: 10px; top: 35px">
+		<div id="suggestList"></div>
+	</div>
+	<!-- <input type="button" value="보여라" onclick="show('suggest')">
+  <input type="button" value="숨겨라" onclick="hide('suggest')"> -->
+</body>
+</html>
+
+
+
+
+

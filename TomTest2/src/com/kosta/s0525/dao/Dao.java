@@ -27,6 +27,18 @@ public class Dao {
 		}
 		return list;
 	}
+	public List<String> selectKeyword(String keyword) {
+		List<String> list = null;
+		try {
+			list= smc.queryForList("selectKeyword",keyword);
+			System.out.println("찾아온 사이즈 : " + list.size());
+		} catch (SQLException e) {
+			System.out.println("???/");
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	
 	public List<Emp> selectAll2() {
 		List<Emp> list = null;

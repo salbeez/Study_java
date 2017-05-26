@@ -14,4 +14,8 @@
 	<select id="selectAllName" resultClass="String">
 		select ename from emp
 	</select>
+
+	<select id="selectKeyword" resultClass="String" parameterClass="String">
+		select ename from emp where ename like #value#
+	</select>
 </sqlMap>

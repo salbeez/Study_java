@@ -1,0 +1,41 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+  <script type="text/javascript">
+       var cnt=0;
+    function addItem(){       
+       cnt++;
+       //document ---> DOM의 Document객체!!(루트얻기, 생성, getElement~)
+       var newItem = document.createElement("div");//<div></div>
+       //newItem: Element(Node)
+       var htmlTxt='새로운 아이템['+cnt+'] <input type=button value=삭제 onclick="removeItem('+cnt+')">';
+       newItem.innerHTML=htmlTxt;  //<div>새로운 아이템</div>
+       //newItem.setAttribute("속성명", "속성값")
+       newItem.setAttribute("id","item_"+cnt);//<div id='item_1'>새로운 아이템</div>
+       
+       
+       var list = document.getElementById('itemList');//list: Element
+       list.appendChild(newItem); //부모노드.appendChild(자식노드);
+       //<div id="itemList"><div>새로운 아이템</div></div>
+    }//addItem
+    
+    function removeItem(no){
+       var delItem = document.getElementById('item_'+no) //지울 엘리먼트 객체 찾기	
+       //var list = document.getElementById('itemList');//list: Element
+       //부모노드.removeChild(자식노드);
+       //list.removeChild(delItem);  
+       delItem.parentNode.removeChild(delItem);
+    }
+  </script>
+</head>
+<!-- changeUsingDOM.html (DOM API를 이용해서 현재HTML페이지를 변경) -->
+<body>
+   <input type="button" value="추가" onclick="addItem()">
+   <div id="itemList"></div>
+
+</body>
+</html>
+
+
