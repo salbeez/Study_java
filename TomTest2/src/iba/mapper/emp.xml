@@ -7,6 +7,11 @@
 	</select>
 
 	<select id="empInfo" resultClass="com.kosta.t0519.dto.Emp">
-		select empno,ename,hiredate from emp
+		select empno,ename,hiredate
+		from emp
+	</select>
+
+	<select id="selectAllName" resultClass="String">
+		select ename from emp
 	</select>
 </sqlMap>
