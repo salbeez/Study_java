@@ -18,4 +18,17 @@
 	<select id="selectKeyword" resultClass="String" parameterClass="String">
 		select ename from emp where ename like #value#
 	</select>
+
+	<select id="selectSido" resultClass="String">
+		select DISTINCT DS_SIDO from
+		DS_ZIP
+	</select>
+
+	<select id="selectGugun" resultClass="String" parameterClass="String">
+		select DISTINCT DS_GUGUN from DS_ZIP where DS_SIDO=#sido#
+	</select>
+
+	<select id="selectDong" resultClass="String" parameterClass="String">
+		select DISTINCT DS_DONG from DS_ZIP where DS_GUGUN=#Gugun#
+	</select>
 </sqlMap>
