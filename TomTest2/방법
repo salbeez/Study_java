@@ -4,3 +4,45 @@
 <forword path="임의 경로" name="컨트롤러에서 받을 String 문자값">
 
 /TomTest2/~~~.do
+
+http://jmap.tistory.com/380 --이클립스에서 한글 깨짐
+
+INSERT INTO itemtypeinfo VALUES (itemtypeinfo_seq.nextval,'빵');
+INSERT INTO itemtypeinfo VALUES (itemtypeinfo_seq.nextval,'음료');
+
+
+
+
+
+
+
+
+
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'사이다',1800,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'코카콜라',2990,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'펩시',2400,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'미닛메이드',3600,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'델몬트',3500,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'포카리스웨트',1850,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'게토레이',1450,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'파워에이드',1350,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'아메리카도',3600,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'실크블랙티',3900,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'허니그린티',3900,1200,2);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'그린티라떼',5300,1200,2);
+commit;
+
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'옥수수식빵',2800,2000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'보리식빵',2700,2000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'잡곡식빵',3800,2000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'통밀식빵',2700,2000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'소보로빵',1200,1000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'단팥빵',1600,1000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'크림빵',1300,1000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'딸기머핀',4300,2000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'브라우니',4100,2000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'양파베이글',1200,1000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'카스테라',3100,2000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'흑미또띠아',5200,2000,1);
+INSERT INTO iteminfo (item_no,item_name,item_userPrice,item_masterPrice,item_type) VALUES (iteminfo_seq.nextval,'단호박찐빵',4000,2000,1);
+commit;
