@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$("#bt1").click(function() {
+			$.get("getData1.jsp", function(resultData, status) {
+				$("#div").html(resultData);
+			});
+		});
+		$("#bt2").click(function() {
+			$.post("getData2.jsp",{
+				name:$("[name=username]").val(),
+				age:$("[name=age]").val()
+			},function(resultData, status){
+				$("#div").html(resultData);
+			});
+		});
+	});
+</script>
+</head>
+<body>
+	<h3>제이 쿼리 Ajax(get,post)</h3>
+
+	<input id="bt1" type="button" value="get">
+	<input id="bt2" type="button" value="post">
+
+	<input name="username" type="text">
+	<input name="age" type="text">
+
+	<div id="div"></div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+	$(function() {
+
+		$("input").click(function() {
+			var id = $(this).attr("id");
+			if (id == "bt1") {
+				$.ajax({
+					type : "post",//생략가능
+					url : "response1.jsp",
+					success : function(data, textStatus, jqxhr) {
+						//Anything data, String textStatus, jqXHR jqXHR
+						$("#d").html(data);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						//jqXHR jqXHR, String textStatus, String errorThrown
+						console.log("에러발생 : " + jqXHR + " " + textStatus + " " + errorThrown);
+					}
+				});
+			} else if (id == "bt2") {
+				$.ajax({
+					type : "post",
+					url : "response2.jsp",
+					success : function(data, textStatus, jqxhr) {
+						//Anything data, String textStatus, jqXHR jqXHR
+						$("#d").html(data);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						//jqXHR jqXHR, String textStatus, String errorThrown
+						console.log("에러발생 : " + jqXHR + " " + textStatus + " " + errorThrown);
+					}
+				});
+			} else if (id == "bt3") {
+				$.ajax({
+					url : "response3.jsp",
+					success : function(data, textStatus, jqxhr) {
+						//Anything data, String textStatus, jqXHR jqXHR
+						var txt =  $(data).find("code").text();
+						txt += $(data).find("name").text();
+						txt += $(data).find("age").text();
+						txt += $(data).find("job").text();
+						$("#d").html(txt);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						//jqXHR jqXHR, String textStatus, String errorThrown
+						console.log("에러발생 : " + jqXHR + " " + textStatus + " " + errorThrown);
+					}
+				});
+			} else if (id == "bt4") {
+				$.ajax({
+					url : "response4.jsp",
+					dataType : "json",
+					success : function(data, textStatus, jqxhr) {
+						//Anything data, String textStatus, jqXHR jqXHR
+						var txt =  data.code+"<br>"
+						+data.data.person.name+"<br>"
+						+data.data.person.age+"<br>"
+						+data.data.person.job;
+						$("#d").html(txt);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						//jqXHR jqXHR, String textStatus, String errorThrown
+						console.log("에러발생 : " + jqXHR + " " + textStatus + " " + errorThrown);
+					}
+				});
+			} else if (id == "bt5") {
+				$.ajax({
+					url : "response5.jsp",
+					success : function(data, textStatus, jqxhr) {
+						//Anything data, String textStatus, jqXHR jqXHR
+						var txt =  $(data).find("code").text();
+						txt+=eval($(data).find("data").item(0).textConTent);
+						$("#d").html(txt);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						//jqXHR jqXHR, String textStatus, String errorThrown
+						console.log("에러발생 : " + jqXHR + " " + textStatus + " " + errorThrown);
+					}
+				});
+			} else if (id == "bt6") {
+				var txt =  "";
+				$.ajax({
+					url : "response6.jsp",
+					dataType : "json",
+					success : function(data, textStatus, jqxhr) {
+						//Anything data, String textStatus, jqXHR jqXHR
+						for(var i=0; i<data.length;i++){
+							txt += data[i].name
+									+data[i].age
+									+data[i].job+"<br>";
+						}
+						
+						$("#d").html(txt);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						//jqXHR jqXHR, String textStatus, String errorThrown
+						console.log("에러발생 : " + jqXHR + " " + textStatus + " " + errorThrown);
+					}
+				});
+			} else {
+				$.ajax({
+					type : "post",
+					url : "response7.jsp",
+					data : {
+						username : "홍길동"
+					},
+					success : function(data, textStatus, jqxhr) {
+						//Anything data, String textStatus, jqXHR jqXHR
+						$("#d").html(data);
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						//jqXHR jqXHR, String textStatus, String errorThrown
+						console.log("에러발생 : " + jqXHR + " " + textStatus + " " + errorThrown);
+					}
+				});
+			}
+
+		});
+
+	});
+</script>
+
+</head>
+<body>
+
+	<input type="button" value="1" id="bt1">
+	<br>
+	<input type="button" value="2" id="bt2">
+	<br>
+	<input type="button" value="3" id="bt3">
+	<br>
+	<input type="button" value="4" id="bt4">
+	<br>
+	<input type="button" value="5" id="bt5">
+	<br>
+	<input type="button" value="6" id="bt6">
+	<br>
+	<input type="button" value="7" id="bt7">
+	<br>
+	<div id="d"></div>
+</body>
+</html>

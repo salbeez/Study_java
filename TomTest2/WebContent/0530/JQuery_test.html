@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("button").click(function() {
+			var id = $(this).attr("id");
+			alert(id);
+			if (id.match("bt_hide")) {
+				$("#list").hide(1000,function(){
+					alert("숨기기 성공");
+				});
+			} else {
+				$("#list").show(1000,lime);// lime()을 하면 콜백 실행전에 실시됨 중요
+			}
+		});
+		function lime(){
+			alert("보이기 성공");
+		}
+		$("tr").css('background-color', '#cccccc');
+	});
+</script>
+
+<body>
+
+	<h3>JQuery Test</h3>
+	<ul id="list">
+		<div>김가희</div>
+		<div>김영대</div>
+		<div>박제호</div>
+		<div>신윤희</div>
+		<div>정명규</div>
+		<div>최희수</div>
+	</ul>
+	<button id="bt_hide">숨기기</button>
+	<button id="bt_show">보이기</button>
+
+
+	<table border="1" cellpadding="5">
+		<tr>
+			<td>홍길동</td>
+			<td>13</td>
+			<td>도적</td>
+		</tr>
+
+		<tr>
+			<td>홍길동</td>
+			<td>13</td>
+			<td>도적</td>
+		</tr>
+
+		<tr>
+			<td>홍길동</td>
+			<td>13</td>
+			<td>도적</td>
+		</tr>
+	</table>
+</body>
+</html>
